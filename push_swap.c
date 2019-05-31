@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:09:35 by rymuller          #+#    #+#             */
-/*   Updated: 2019/05/31 16:33:06 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/05/31 16:49:49 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,8 @@ void		sort(t_stack *stack)
 	int				rb_count;
 	int				iter_count;
 
-	iter_count = 0;
-
 /*
+	iter_count = 0;
 	while (stack->len_a > 1)
 	{
 		len = 0;
