@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:09:35 by rymuller          #+#    #+#             */
-/*   Updated: 2019/05/31 16:49:49 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/06 18:45:57 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int			find_pivot_stack_a(t_stack *stack, int len)
 	quicksort(arr, 0, len - 1);
 	return (arr[len >> 1]);
 }
-/*
+
 int			find_pivot_stack_b(t_stack *stack, int len)
 {
 	int				i;
@@ -45,7 +45,7 @@ int			find_pivot_stack_b(t_stack *stack, int len)
 	quicksort(arr, 0, len - 1);
 	return (arr[len >> 1]);
 }
-*/
+
 int			find_max_stack_b(t_stack *stack, int len)
 {
 	int				i;
@@ -79,8 +79,8 @@ char		is_less_pivot_stack_a(t_stack *stack, int len, int pivot)
 	}
 	return (0);
 }
-/*
-char		is_less_pivot_stack_b(t_stack *stack, int len, int pivot)
+
+char		is_more_pivot_stack_b(t_stack *stack, int len, int pivot)
 {
 	int				i;
 	t_doubly_list	*buff;
@@ -89,30 +89,31 @@ char		is_less_pivot_stack_b(t_stack *stack, int len, int pivot)
 	buff = stack->top_b;
 	while (++i < len)
 	{
-		if (buff->value < pivot)
+		if (buff->value > pivot)
 			return (1);
 		buff = buff->prev;
 	}
 	return (0);
 }
-*/
+
 void		sort(t_stack *stack)
 {
-	int				len;
-	int				max;
+//	int				max;
+	int				coeff;
 	int				pivot;
 	int				rb_count;
 	int				iter_count;
+	int				len_less_pivot;
 
-/*
+	coeff = 20;
 	iter_count = 0;
-	while (stack->len_a > 1)
+	while (stack->len_a > 3)
 	{
-		len = 0;
+		len_less_pivot = 0;
 		pivot = find_pivot_stack_a(stack, stack->len_a);
-//		ft_printf("------------------------\n");
-//		ft_printf("pivot = %d\n", pivot);
-//		ft_printf("------------------------\n");
+		ft_printf("------------------------\n");
+		ft_printf("stack_a pivot = %d\n", pivot);
+		ft_printf("------------------------\n");
 		while (is_less_pivot_stack_a(stack, stack->len_a, pivot))
 		{
 			if (stack->top_a->value < pivot)
@@ -121,7 +122,7 @@ void		sort(t_stack *stack)
 //				ft_printf("pb\n");
 //				print_stack(stack);
 				iter_count++;
-				len++;
+				len_less_pivot++;
 			}
 			else
 			{
@@ -131,9 +132,50 @@ void		sort(t_stack *stack)
 				iter_count++;
 			}
 		}
-		stack->top_b->len = len;
-//		ft_printf("top_b = %d, len = %d, max stack_b = %d\n", stack->top_b->value, stack->top_b->len, find_max_stack_b(stack, len));
+		rb_count = 0;
+		print_stack(stack);
+		while (stack->size - stack->len_a > coeff)
+		{
+			pivot = find_pivot_stack_b(stack, len_less_pivot);
+			ft_printf("------------------------\n");
+			ft_printf("stack_b pivot = %d\n", pivot);
+			ft_printf("------------------------\n");
+			while (is_more_pivot_stack_b(stack, len_less_pivot, pivot))
+			{
+				if (stack->top_b->value > pivot)
+				{
+					pa(stack);
+//					ft_printf("pa\n");
+//					print_stack(stack);
+					iter_count++;
+					len_less_pivot--;
+				}
+				else
+				{
+					rb(stack);
+//					ft_printf("rb\n");
+//					print_stack(stack);
+					iter_count++;
+					rb_count++;
+				}	
+			}
+			while (coeff > 20 && rb_count > 0)
+			{
+				rrb(stack);
+				rb_count--;
+				iter_count++;
+			}
+		}
+		stack->top_b->triple = 1;
+		ft_printf("------------------------\n");
+		ft_printf("value = %d, triple = %d\n", stack->top_b->value, stack->top_b->triple);
+		ft_printf("------------------------\n");
+		coeff += 20;
+//		ft_printf("top_b = %d, len = %d, max stack_b = %d\n", stack->top_b->value, stack->top_b->triple, find_max_stack_b(stack, len));*/
 	}
+	print_stack(stack);
+	ft_printf("%d\n", iter_count);
+/*
 	while (stack->size - stack->len_a != 0)
 	{
 		max = find_max_stack_b(stack, stack->top_b->len);
@@ -182,7 +224,7 @@ int			main(int argc, char **argv)
 		ft_printf("------------------------\n");
 		sort(&stack);
 		ft_printf("------------------------\n");
-		print_stack(&stack);
+//		print_stack(&stack);
 		free_doubly_list(&stack);
 	}
 	return (0);
