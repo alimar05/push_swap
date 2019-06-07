@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 13:06:27 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/06 14:35:24 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/07 12:56:24 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 typedef struct				s_doubly_list
 {
 	int						value;
-	unsigned int			triple:1;
+	size_t					len_pivot;
 	struct s_doubly_list	*prev;
 	struct s_doubly_list	*next;
 }							t_doubly_list;

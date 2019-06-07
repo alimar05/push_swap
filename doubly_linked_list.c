@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 18:26:48 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/06 14:35:39 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/07 11:39:02 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_doubly_list	*ft_list_new(int value)
 	if (!(list = (t_doubly_list *)malloc(sizeof(t_doubly_list))))
 		return (NULL);
 	list->value = value;
-	list->triple = 0;
+	list->len_pivot = 0;
 	list->prev = NULL;
 	list->next = NULL;
 	return (list);
