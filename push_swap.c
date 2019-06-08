@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:09:35 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/07 17:24:16 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/08 18:41:57 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,15 @@ char		is_more_pivot_stack_b(t_stack *stack, int len, int pivot)
 void		sort(t_stack *stack)
 {
 //	int				max;
-//	int				coeff;
 	int				pivot;
+	size_t			ra_count;
 	size_t			rb_count;
 	size_t			iter_count;
 	size_t			len_less_pivot;
 	size_t			len_more_pivot;
-	size_t			temp;
+	size_t			len_temp;
+	size_t			origin_len_pivot;
 
-//	coeff = 20;
 	iter_count = 0;
 	while (stack->len_a > 3)
 	{
@@ -139,18 +139,34 @@ void		sort(t_stack *stack)
 				iter_count++;
 			}
 		}
-		rb_count = 0;
 		print_stack(stack);
 		stack->top_b->len_pivot = len_less_pivot;
-/*		
-		print_stack(stack);
-		while (stack->size - stack->len_a > coeff)
+	}
+	print_stack(stack);
+	rb_count = 0;
+	origin_len_pivot = 0;
+	while (stack->size - stack->len_a > 0)
+	{
+		if (stack->top_b->len_pivot < 2)
 		{
-			pivot = find_pivot_stack_b(stack, len_less_pivot);
-			ft_printf("------------------------\n");
-			ft_printf("stack_b pivot = %d\n", pivot);
-			ft_printf("------------------------\n");
-			while (is_more_pivot_stack_b(stack, len_less_pivot, pivot))
+			pa(stack);
+			iter_count++;
+		}
+		else if (stack->top_b->len_pivot < 3)
+		{
+			pa(stack);
+			pa(stack);
+			iter_count += 2;
+		}
+		else
+		{
+			print_stack(stack);
+
+			len_more_pivot = 0;
+			origin_len_pivot = stack->top_b->len_pivot;
+			len_temp = origin_len_pivot;
+			pivot = find_pivot_stack_b(stack, origin_len_pivot);
+			while (is_more_pivot_stack_b(stack, len_temp, pivot))
 			{
 				if (stack->top_b->value > pivot)
 				{
@@ -158,7 +174,7 @@ void		sort(t_stack *stack)
 //					ft_printf("pa\n");
 //					print_stack(stack);
 					iter_count++;
-					len_less_pivot--;
+					len_more_pivot++;
 				}
 				else
 				{
@@ -168,90 +184,55 @@ void		sort(t_stack *stack)
 					iter_count++;
 					rb_count++;
 				}
+				len_temp--;
 			}
-			while (coeff > 20 && rb_count > 0)
+			while (rb_count > 0)
 			{
 				rrb(stack);
 				rb_count--;
 				iter_count++;
 			}
-		}
-		stack->top_b->div = 1;
-		ft_printf("------------------------\n");
-		ft_printf("value = %d, triple = %d\n", stack->top_b->value, stack->top_b->div);
-		ft_printf("------------------------\n");
-		coeff += 20;
-*/
-//		ft_printf("top_b = %d, len = %d, max stack_b = %d\n", stack->top_b->value, stack->top_b->triple, find_max_stack_b(stack, len));*/
-	}
-	while (stack->size - stack->len_a > 0)
-	{
-		len_more_pivot = 0;
-		while (stack->top_b->len_pivot < 3)
-		{
-			pa(stack);
-			len_more_pivot++;
-			iter_count++;
-		}
-		print_stack(stack);
-		pivot = find_pivot_stack_b(stack, stack->top_b->len_pivot);
-		temp = stack->top_b->len_pivot;
-		while (is_more_pivot_stack_b(stack, temp, pivot))
-		{
-			if (stack->top_b->value > pivot)
-			{
-				pa(stack);
-//				ft_printf("pa\n");
-//				print_stack(stack);
-				len_more_pivot++;
-				iter_count++;
-			}
-			else
-			{
-				rb(stack);
-//				ft_printf("rb\n");
-//				print_stack(stack);
-				rb_count++;
-				iter_count++;
-			}
-			temp--;
 			print_stack(stack);
-		}
-		stack->top_a->len_pivot = len_more_pivot;
-		while (rb_count > 0)
-		{
-			rrb(stack);
-			rb_count--;
-			iter_count++;
-		}
-		while (stack->top_a->len_pivot > 3)
-		{
+
 			len_less_pivot = 0;
-			pivot = find_pivot_stack_a(stack, stack->top_a->len_pivot);
-			temp = stack->top_a->len_pivot;
-			while (is_less_pivot_stack_a(stack, temp, pivot))
+			while (len_more_pivot > 3)
 			{
-				if (stack->top_a->value < pivot)
+				len_temp = len_more_pivot;
+				pivot = find_pivot_stack_a(stack, len_more_pivot);
+				while (is_less_pivot_stack_a(stack, len_temp, pivot))
 				{
-					pb(stack);
-//					ft_printf("pb\n");
-//					print_stack(stack);
-					iter_count++;
-					len_less_pivot++;
+					if (stack->top_b->value > pivot)
+					{
+						pb(stack);
+//						ft_printf("pa\n");
+//						print_stack(stack);
+						iter_count++;
+						len_more_pivot--;
+						len_less_pivot++;
+					}
+					else
+					{
+						ra(stack);
+//						ft_printf("rb\n");
+//						print_stack(stack);
+						iter_count++;
+						ra_count++;
+					}
+					len_temp--;
 				}
-				else
+				while (ra_count > 0)
 				{
-					ra(stack);
-//					ft_printf("ra\n");
-//					print_stack(stack);
+					rra(stack);
+					ra_count--;
 					iter_count++;
 				}
-				temp--;
 				print_stack(stack);
 			}
+			origin_len_pivot += len_less_pivot;
 		}
-		stack->top_b->len_pivot = len_less_pivot;
 	}
+//	ft_printf("top_b = %d, len = %d, max stack_b = %d\n", stack->top_b->value, stack->top_b->triple, find_max_stack_b(stack, len));*/
+		
 	print_stack(stack);
 	ft_printf("%d\n", iter_count);
 /*
