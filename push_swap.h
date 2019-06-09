@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 13:06:27 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/07 12:56:24 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/09 17:02:08 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 typedef struct				s_doubly_list
 {
 	int						value;
-	size_t					len_pivot;
 	struct s_doubly_list	*prev;
 	struct s_doubly_list	*next;
 }							t_doubly_list;
@@ -47,7 +46,7 @@ void						rra(t_stack *stack);
 void						rrb(t_stack *stack);
 void						rrr(t_stack *stack);
 void						print_stack(t_stack *stack);
-void						free_doubly_list(t_stack *list);
+void						free_doubly_list(t_doubly_list *doubly_list);
 char						is_sort_stack(t_doubly_list *top);
 void						quicksort(int *arr, int low, int high);
 char						is_swap_command(t_stack *stack, char *line);
@@ -56,4 +55,5 @@ char						is_rotate_command(t_stack *stack, char *line);
 char						is_rev_rotate_command(t_stack *stack, char *line);
 char						is_placing_argv_stack(t_stack *stack, int argc, char **argv);
 t_doubly_list				*ft_list_push_back(t_stack *stack, int value);
+t_doubly_list				*ft_list_push_forw(t_doubly_list *doubly_list, int len);
 #endif

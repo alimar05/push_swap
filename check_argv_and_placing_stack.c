@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:15:43 by rymuller          #+#    #+#             */
-/*   Updated: 2019/05/25 12:34:36 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/09 17:03:30 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,12 @@ char			is_placing_argv_stack(t_stack *stack, int argc, char **argv)
 		return (0);
 	if (!fill_stack(stack, argc, argv))
 	{
-		free_doubly_list(stack);
+		free_doubly_list(stack->btm_b);
 		return (0);
 	}
 	if (is_dupl_in_stack(stack))
 	{
-		free_doubly_list(stack);
+		free_doubly_list(stack->btm_b);
 		return (0);
 	}
 	return (1);

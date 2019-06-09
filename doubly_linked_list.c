@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 18:26:48 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/07 11:39:02 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/09 18:14:03 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,18 @@ static t_doubly_list	*ft_list_new(int value)
 	if (!(list = (t_doubly_list *)malloc(sizeof(t_doubly_list))))
 		return (NULL);
 	list->value = value;
-	list->len_pivot = 0;
 	list->prev = NULL;
 	list->next = NULL;
 	return (list);
 }
 
-void					free_doubly_list(t_stack *stack)
+void					free_doubly_list(t_doubly_list *doubly_list)
 {
 	t_doubly_list	*buffer;
 
-	if (stack->btm_b)
+	if (doubly_list)
 	{
-		buffer = stack->btm_b;
+		buffer = doubly_list;
 		while (buffer->next)
 		{
 			buffer = buffer->next;
@@ -41,9 +40,28 @@ void					free_doubly_list(t_stack *stack)
 	}
 }
 
-/*
- * return: head of the doubly linked list
-*/
+t_doubly_list			*ft_list_push_forw(t_doubly_list *doubly_list, int len)
+{
+	t_doubly_list	*buffer;
+
+	if (doubly_list)
+	{
+		if (!(buffer = ft_list_new(len)))
+		{
+			free_doubly_list(doubly_list);
+			exit(EXIT_FAILURE);
+		}
+		doubly_list->prev = buffer;
+		buffer->next = doubly_list;
+		return (buffer);
+	}
+	else
+	{
+		if (!(buffer = ft_list_new(len)))
+			exit(EXIT_FAILURE);
+		return (buffer);
+	}
+}
 
 t_doubly_list			*ft_list_push_back(t_stack *stack, int value)
 {
@@ -56,7 +74,7 @@ t_doubly_list			*ft_list_push_back(t_stack *stack, int value)
 			buffer = buffer->next;
 		if (!(buffer->next = ft_list_new(value)))
 		{
-			free_doubly_list(stack);
+			free_doubly_list(stack->btm_b);
 			exit(EXIT_FAILURE);
 		}
 		stack->btm_a = buffer->next;

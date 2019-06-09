@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:09:35 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/08 18:41:57 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/09 18:14:02 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char		is_less_pivot_stack_a(t_stack *stack, int len, int pivot)
 	return (0);
 }
 
-char		is_more_pivot_stack_b(t_stack *stack, int len, int pivot)
+char		is_more_eq_pvt_stack_b(t_stack *stack, int len, int pivot)
 {
 	int				i;
 	t_doubly_list	*buff;
@@ -97,7 +97,7 @@ char		is_more_pivot_stack_b(t_stack *stack, int len, int pivot)
 	buff = stack->top_b;
 	while (++i < len)
 	{
-		if (buff->value > pivot)
+		if (buff->value >= pivot)
 			return (1);
 		buff = buff->prev;
 	}
@@ -106,17 +106,16 @@ char		is_more_pivot_stack_b(t_stack *stack, int len, int pivot)
 
 void		sort(t_stack *stack)
 {
-//	int				max;
 	int				pivot;
 	size_t			ra_count;
 	size_t			rb_count;
 	size_t			iter_count;
 	size_t			len_less_pivot;
 	size_t			len_more_pivot;
-	size_t			len_temp;
-	size_t			origin_len_pivot;
+	t_doubly_list	*len_pivots;
 
 	iter_count = 0;
+	len_pivots = NULL;
 	while (stack->len_a > 3)
 	{
 		len_less_pivot = 0;
@@ -128,8 +127,8 @@ void		sort(t_stack *stack)
 				pb(stack);
 //				ft_printf("pb\n");
 //				print_stack(stack);
-				iter_count++;
 				len_less_pivot++;
+				iter_count++;
 			}
 			else
 			{
@@ -139,52 +138,44 @@ void		sort(t_stack *stack)
 				iter_count++;
 			}
 		}
+		len_pivots = ft_list_push_forw(len_pivots, len_less_pivot);
 		print_stack(stack);
-		stack->top_b->len_pivot = len_less_pivot;
 	}
 	print_stack(stack);
+	len_more_pivot = 0;
 	rb_count = 0;
-	origin_len_pivot = 0;
-	while (stack->size - stack->len_a > 0)
+	while (stack->size != stack->len_a)
 	{
-		if (stack->top_b->len_pivot < 2)
+		if (len_pivots->value < 3)
 		{
-			pa(stack);
-			iter_count++;
-		}
-		else if (stack->top_b->len_pivot < 3)
-		{
-			pa(stack);
-			pa(stack);
-			iter_count += 2;
+			while (len_pivots->value)
+			{
+				pa(stack);
+				len_pivots->value--;
+				iter_count++;
+			}
+			len_pivots = len_pivots->next;
+			// TO DO sort double
 		}
 		else
 		{
-			print_stack(stack);
-
 			len_more_pivot = 0;
-			origin_len_pivot = stack->top_b->len_pivot;
-			len_temp = origin_len_pivot;
-			pivot = find_pivot_stack_b(stack, origin_len_pivot);
-			while (is_more_pivot_stack_b(stack, len_temp, pivot))
+			pivot = find_pivot_stack_b(stack, len_pivots->value);
+			while (is_more_eq_pvt_stack_b(stack, len_pivots->value, pivot))
 			{
-				if (stack->top_b->value > pivot)
+				if (stack->top_b->value >= pivot)
 				{
 					pa(stack);
-//					ft_printf("pa\n");
-//					print_stack(stack);
-					iter_count++;
 					len_more_pivot++;
+					len_pivots->value--;
+					iter_count++;
 				}
 				else
 				{
 					rb(stack);
-//					ft_printf("rb\n");
-//					print_stack(stack);
+					rb_count++:
 					iter_count++;
-					rb_count++;
 				}
-				len_temp--;
 			}
 			while (rb_count > 0)
 			{
@@ -192,81 +183,10 @@ void		sort(t_stack *stack)
 				rb_count--;
 				iter_count++;
 			}
-			print_stack(stack);
-
-			len_less_pivot = 0;
-			while (len_more_pivot > 3)
-			{
-				len_temp = len_more_pivot;
-				pivot = find_pivot_stack_a(stack, len_more_pivot);
-				while (is_less_pivot_stack_a(stack, len_temp, pivot))
-				{
-					if (stack->top_b->value > pivot)
-					{
-						pb(stack);
-//						ft_printf("pa\n");
-//						print_stack(stack);
-						iter_count++;
-						len_more_pivot--;
-						len_less_pivot++;
-					}
-					else
-					{
-						ra(stack);
-//						ft_printf("rb\n");
-//						print_stack(stack);
-						iter_count++;
-						ra_count++;
-					}
-					len_temp--;
-				}
-				while (ra_count > 0)
-				{
-					rra(stack);
-					ra_count--;
-					iter_count++;
-				}
-				print_stack(stack);
-			}
-			origin_len_pivot += len_less_pivot;
 		}
 	}
-//	ft_printf("top_b = %d, len = %d, max stack_b = %d\n", stack->top_b->value, stack->top_b->triple, find_max_stack_b(stack, len));*/
-		
-	print_stack(stack);
+	free_doubly_list(len_pivots);
 	ft_printf("%d\n", iter_count);
-/*
-	while (stack->size - stack->len_a != 0)
-	{
-		max = find_max_stack_b(stack, stack->top_b->len);
-		len = stack->top_b->len;
-		rb_count = 0;
-		while (stack->top_b->value != max)
-		{
-			rb(stack);
-//			ft_printf("rb\n");
-			iter_count++;
-			rb_count++;
-		}
-		if (stack->top_b->value == max)
-		{
-			pa(stack);
-//			ft_printf("pa\n");
-			iter_count++;
-			len--;
-		}
-		while (rb_count != 0)
-		{
-			rrb(stack);
-//			ft_printf("rrb\n");
-			iter_count++;
-			rb_count--;
-		}
-		if (len > 0)
-			stack->top_b->len = len;
-	}
-	ft_printf("%d\n", iter_count);
-*/
 }
 
 int			main(int argc, char **argv)
@@ -285,7 +205,7 @@ int			main(int argc, char **argv)
 		sort(&stack);
 		ft_printf("------------------------\n");
 //		print_stack(&stack);
-		free_doubly_list(&stack);
+		free_doubly_list(stack.btm_b);
 	}
 	return (0);
 }
