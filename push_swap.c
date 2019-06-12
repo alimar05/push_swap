@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:09:35 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/09 18:14:02 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/12 15:51:43 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			find_pivot_stack_a(t_stack *stack, int len)
 		quicksort(arr, 0, len - 1);
 		return (arr[len >> 1]);
 	}
-	return (top->value);
+	return (stack->top_a->value);
 }
 
 int			find_pivot_stack_b(t_stack *stack, int len)
@@ -51,7 +51,7 @@ int			find_pivot_stack_b(t_stack *stack, int len)
 		quicksort(arr, 0, len - 1);
 		return (arr[len >> 1]);
 	}
-	return (top->value);
+	return (stack->top_b->value);
 }
 
 int			find_max_stack_b(t_stack *stack, int len)
@@ -111,7 +111,7 @@ void		sort(t_stack *stack)
 	size_t			rb_count;
 	size_t			iter_count;
 	size_t			len_less_pivot;
-	size_t			len_more_pivot;
+	size_t			len_mr_eq_pvt;
 	t_doubly_list	*len_pivots;
 
 	iter_count = 0;
@@ -126,7 +126,6 @@ void		sort(t_stack *stack)
 			{
 				pb(stack);
 //				ft_printf("pb\n");
-//				print_stack(stack);
 				len_less_pivot++;
 				iter_count++;
 			}
@@ -134,57 +133,75 @@ void		sort(t_stack *stack)
 			{
 				ra(stack);
 //				ft_printf("ra\n");
-//				print_stack(stack);
 				iter_count++;
 			}
 		}
 		len_pivots = ft_list_push_forw(len_pivots, len_less_pivot);
-		print_stack(stack);
 	}
 	print_stack(stack);
-	len_more_pivot = 0;
+	ra_count = 0;
 	rb_count = 0;
+	len_mr_eq_pvt = 0;
 	while (stack->size != stack->len_a)
 	{
-		if (len_pivots->value < 3)
+		len_mr_eq_pvt = 0;
+		pivot = find_pivot_stack_b(stack, len_pivots->value);
+		while (is_more_eq_pvt_stack_b(stack, len_pivots->value, pivot))
 		{
-			while (len_pivots->value)
+			if (stack->top_b->value >= pivot)
 			{
 				pa(stack);
-				len_pivots->value--;
+				len_mr_eq_pvt++;
 				iter_count++;
 			}
-			len_pivots = len_pivots->next;
-			// TO DO sort double
-		}
-		else
-		{
-			len_more_pivot = 0;
-			pivot = find_pivot_stack_b(stack, len_pivots->value);
-			while (is_more_eq_pvt_stack_b(stack, len_pivots->value, pivot))
+			else
 			{
-				if (stack->top_b->value >= pivot)
+				rb(stack);
+				rb_count++;
+				iter_count++;
+			}
+			len_pivots->value--;
+		}
+		while (rb_count > 0)
+		{
+			rrb(stack);
+			rb_count--;
+			iter_count++;
+			len_pivots->value++;
+		}
+		while (len_mr_eq_pvt > 3)
+		{
+			pivot = find_pivot_stack_a(stack, len_mr_eq_pvt);
+			while (is_less_pivot_stack_a(stack, len_mr_eq_pvt, pivot))
+			{
+				if (stack->top_a->value < pivot)
 				{
-					pa(stack);
-					len_more_pivot++;
-					len_pivots->value--;
+					pb(stack);
+//					ft_printf("pb\n");
+					len_pivots->value++;
 					iter_count++;
 				}
 				else
 				{
-					rb(stack);
-					rb_count++:
+					ra(stack);
+					ra_count++;
+//					ft_printf("ra\n");
 					iter_count++;
 				}
+				len_mr_eq_pvt--;
 			}
-			while (rb_count > 0)
+			while (ra_count > 0)
 			{
-				rrb(stack);
-				rb_count--;
+				rra(stack);
+				ra_count--;
 				iter_count++;
+				len_mr_eq_pvt++;
 			}
 		}
+		if (len_pivots->value == 0)
+			len_pivots = len_pivots->next;
 	}
+	print_stack(stack);
 	free_doubly_list(len_pivots);
 	ft_printf("%d\n", iter_count);
 }
