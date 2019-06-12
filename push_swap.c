@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:09:35 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/12 15:51:43 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/12 18:53:36 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,14 +125,12 @@ void		sort(t_stack *stack)
 			if (stack->top_a->value < pivot)
 			{
 				pb(stack);
-//				ft_printf("pb\n");
 				len_less_pivot++;
 				iter_count++;
 			}
 			else
 			{
 				ra(stack);
-//				ft_printf("ra\n");
 				iter_count++;
 			}
 		}
@@ -160,6 +158,7 @@ void		sort(t_stack *stack)
 				rb_count++;
 				iter_count++;
 			}
+			print_stack(stack);
 			len_pivots->value--;
 		}
 		while (rb_count > 0)
@@ -169,6 +168,7 @@ void		sort(t_stack *stack)
 			iter_count++;
 			len_pivots->value++;
 		}
+		print_stack(stack);
 		while (len_mr_eq_pvt > 3)
 		{
 			pivot = find_pivot_stack_a(stack, len_mr_eq_pvt);
@@ -177,7 +177,6 @@ void		sort(t_stack *stack)
 				if (stack->top_a->value < pivot)
 				{
 					pb(stack);
-//					ft_printf("pb\n");
 					len_pivots->value++;
 					iter_count++;
 				}
@@ -185,9 +184,9 @@ void		sort(t_stack *stack)
 				{
 					ra(stack);
 					ra_count++;
-//					ft_printf("ra\n");
 					iter_count++;
 				}
+				print_stack(stack);
 				len_mr_eq_pvt--;
 			}
 			while (ra_count > 0)
@@ -197,6 +196,7 @@ void		sort(t_stack *stack)
 				iter_count++;
 				len_mr_eq_pvt++;
 			}
+			print_stack(stack);
 		}
 		if (len_pivots->value == 0)
 			len_pivots = len_pivots->next;
