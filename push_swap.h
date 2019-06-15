@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 13:06:27 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/09 17:02:08 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/15 12:33:43 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ void						rrr(t_stack *stack);
 void						print_stack(t_stack *stack);
 void						free_doubly_list(t_doubly_list *doubly_list);
 char						is_sort_stack(t_doubly_list *top);
-void						quicksort(int *arr, int low, int high);
+void						quicksort(int *arr, int low, int high, char asc);
 char						is_swap_command(t_stack *stack, char *line);
 char						is_push_command(t_stack *stack, char *line);
 char						is_rotate_command(t_stack *stack, char *line);
 char						is_rev_rotate_command(t_stack *stack, char *line);
 char						is_placing_argv_stack(t_stack *stack, int argc, char **argv);
+t_doubly_list				*ft_list_new(int value);
+t_doubly_list				*del_list_forw(t_doubly_list *doubly_list);
 t_doubly_list				*ft_list_push_back(t_stack *stack, int value);
 t_doubly_list				*ft_list_push_forw(t_doubly_list *doubly_list, int len);
 #endif

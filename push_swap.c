@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:09:35 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/13 14:43:24 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/15 14:31:52 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			find_pvt_stack_a(t_stack *stack, int len)
 			arr[i] = top->value;
 			top = top->next;
 		}
-		quicksort(arr, 0, len - 1);
+		quicksort(arr, 0, len - 1, 0);
 		return (arr[len >> 1]);
 	}
 	return (stack->top_a->value);
@@ -48,12 +48,12 @@ int			find_pvt_stack_b(t_stack *stack, int len)
 			arr[i] = top->value;
 			top = top->prev;
 		}
-		quicksort(arr, 0, len - 1);
+		quicksort(arr, 0, len - 1, 1);
 		return (arr[len >> 1]);
 	}
 	return (stack->top_b->value);
 }
-
+/*
 int			find_max_stack_b(t_stack *stack, int len)
 {
 	int				i;
@@ -71,7 +71,7 @@ int			find_max_stack_b(t_stack *stack, int len)
 	}
 	return (max);
 }
-
+*/
 char		is_less_pvt_stack_a(t_stack *stack, int len, int pvt)
 {
 	int				i;
@@ -88,7 +88,7 @@ char		is_less_pvt_stack_a(t_stack *stack, int len, int pvt)
 	return (0);
 }
 
-char		is_more_eq_pvt_stack_b(t_stack *stack, int len, int pvt)
+char		is_more_pvt_stack_b(t_stack *stack, int len, int pvt)
 {
 	int				i;
 	t_doubly_list	*buff;
@@ -97,7 +97,7 @@ char		is_more_eq_pvt_stack_b(t_stack *stack, int len, int pvt)
 	buff = stack->top_b;
 	while (++i < len)
 	{
-		if (buff->value >= pvt)
+		if (buff->value > pvt)
 			return (1);
 		buff = buff->prev;
 	}
@@ -107,11 +107,12 @@ char		is_more_eq_pvt_stack_b(t_stack *stack, int len, int pvt)
 void		sort(t_stack *stack)
 {
 	int				pvt;
+	size_t			len;
 	size_t			ra_count;
 	size_t			rb_count;
 	size_t			iter_count;
 	size_t			len_less_pvt;
-	size_t			len_mr_eq_pvt;
+	size_t			len_more_pvt;
 	t_doubly_list	*len_pvts_b;
 
 	iter_count = 0;
@@ -138,82 +139,104 @@ void		sort(t_stack *stack)
 			}
 		}
 		len_pvts_b = ft_list_push_forw(len_pvts_b, len_less_pvt);
-		ft_printf("------------------------------\n");
-		ft_printf("%d\n", len_less_pvt);
-		ft_printf("------------------------------\n");
 	}
+/*
+	while (len_pvts_b)
+	{
+		ft_printf("%d\n", len_pvts_b->value);
+		len_pvts_b = len_pvts_b->next;
+	}
+*/
 	print_stack(stack);
 	ra_count = 0;
 	rb_count = 0;
-	len_mr_eq_pvt = 0;
+	len_more_pvt = 0;
 	while (stack->size != stack->len_a)
 	{
-		len_mr_eq_pvt = 0;
-		pvt = find_pvt_stack_b(stack, len_pvts_b->value);
-		ft_printf("------------------------------\n");
-		ft_printf("pvt_stack_b = %d, len_pvts_b->value = %d\n", pvt, len_pvts_b->value);
-		ft_printf("------------------------------\n");
-		ft_printf("------------------------------\n");
-		while (is_more_eq_pvt_stack_b(stack, len_pvts_b->value, pvt))
+		if (len_pvts_b->value < 3)
 		{
-			if (stack->top_b->value >= pvt)
+			while (len_pvts_b->value)
 			{
 				pa(stack);
-				len_mr_eq_pvt++;
+				print_stack(stack);
 				iter_count++;
+				len_pvts_b->value--;
 			}
-			else
-			{
-				rb(stack);
-				rb_count++;
-				iter_count++;
-			}
-			print_stack(stack);
-			len_pvts_b->value--;
+			len_pvts_b = del_list_forw(len_pvts_b);
+			if (stack->top_a->value > stack->top_a->next->value)
+				sa(stack);
 		}
-		while (rb_count > 0)
+		else
 		{
-			rrb(stack);
-			rb_count--;
-			iter_count++;
-			len_pvts_b->value++;
-		}
-		print_stack(stack);
-		while (len_mr_eq_pvt > 3)
-		{
-			pvt = find_pvt_stack_a(stack, len_mr_eq_pvt);
+			len_more_pvt = 0;
+			len = len_pvts_b->value;
+			pvt = find_pvt_stack_b(stack, len);
 			ft_printf("------------------------------\n");
-			ft_printf("pvt_stack_a = %d, len_mr_eq_pvt = %d\n", pvt, len_mr_eq_pvt);
+			ft_printf("pvt_stack_b = %d, len_pvts_b->value = %d\n", pvt, len);
 			ft_printf("------------------------------\n");
 			ft_printf("------------------------------\n");
-			while (is_less_pvt_stack_a(stack, len_mr_eq_pvt, pvt))
+			while (is_more_pvt_stack_b(stack, len, pvt))
 			{
-				if (stack->top_a->value < pvt)
+				if (stack->top_b->value > pvt)
 				{
-					pb(stack);
-					len_pvts_b->value++;
+					pa(stack);
+					len_more_pvt++;
 					iter_count++;
 				}
 				else
 				{
-					ra(stack);
-					ra_count++;
+					rb(stack);
+					rb_count++;
 					iter_count++;
 				}
 				print_stack(stack);
-				len_mr_eq_pvt--;
+				len--;
 			}
-			while (ra_count > 0)
+			while (rb_count > 0)
 			{
-				rra(stack);
-				ra_count--;
+				rrb(stack);
+				rb_count--;
 				iter_count++;
-				len_mr_eq_pvt++;
 			}
+			len_pvts_b->value -= len_more_pvt;
 			print_stack(stack);
+			len_less_pvt = 0;
+			while (len_more_pvt > 3)
+			{
+				pvt = find_pvt_stack_a(stack, len_more_pvt);
+				ft_printf("------------------------------\n");
+				ft_printf("pvt_stack_a = %d, len_more_pvt = %d\n", pvt, len_more_pvt);
+				ft_printf("------------------------------\n");
+				ft_printf("------------------------------\n");
+				while (is_less_pvt_stack_a(stack, len_more_pvt, pvt))
+				{
+					if (stack->top_a->value < pvt)
+					{
+						pb(stack);
+						len_less_pvt++;
+						iter_count++;
+					}
+					else
+					{
+						ra(stack);
+						ra_count++;
+						iter_count++;
+					}
+					print_stack(stack);
+					len_more_pvt--;
+				}
+				while (ra_count > 0)
+				{
+					rra(stack);
+					ra_count--;
+					iter_count++;
+					len_more_pvt++;
+				}
+				print_stack(stack);
+				len_pvts_b = ft_list_push_forw(len_pvts_b, len_less_pvt);
+			}
+			// TO DO sort
 		}
-		if (len_pvts_b->value == 0)
-			len_pvts_b = len_pvts_b->next;
 	}
 	print_stack(stack);
 	free_doubly_list(len_pvts_b);
@@ -231,7 +254,7 @@ int			main(int argc, char **argv)
 			write(2, "Error\n", 6);
 			return (0);
 		}
-		print_stack(&stack);
+//		print_stack(&stack);
 		ft_printf("------------------------\n");
 		sort(&stack);
 		ft_printf("------------------------\n");
