@@ -6,19 +6,19 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 12:10:57 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/15 12:25:55 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/16 00:13:47 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_doubly_list			*ft_list_push_forw(t_doubly_list *doubly_list, int len)
+t_doubly_list			*ft_list_push_forw(t_doubly_list *doubly_list, int value)
 {
 	t_doubly_list	*buffer;
 
 	if (doubly_list)
 	{
-		if (!(buffer = ft_list_new(len)))
+		if (!(buffer = ft_list_new(value)))
 		{
 			free_doubly_list(doubly_list);
 			exit(EXIT_FAILURE);
@@ -29,7 +29,7 @@ t_doubly_list			*ft_list_push_forw(t_doubly_list *doubly_list, int len)
 	}
 	else
 	{
-		if (!(buffer = ft_list_new(len)))
+		if (!(buffer = ft_list_new(value)))
 			exit(EXIT_FAILURE);
 		return (buffer);
 	}
