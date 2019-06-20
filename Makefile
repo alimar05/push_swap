@@ -6,7 +6,7 @@
 #    By: rymuller <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 12:31:51 by rymuller          #+#    #+#              #
-#    Updated: 2019/06/20 13:46:44 by rymuller         ###   ########.fr        #
+#    Updated: 2019/06/20 15:22:21 by rymuller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,25 +28,23 @@ LIB := -L./libft -lft -L./ft_printf -lftprintf
 
 all: $(NAME1) $(NAME2)
 
-$(NAME1): $(SRC)
+$(NAME1): $(SRC) checker.c
 	make -C libft
 	make -C ft_printf
 	gcc $(CFLAGS) $(HEADER) $(SRC) checker.c $(LIB) -o $(NAME1)
 
-$(NAME2): $(SRC)
+$(NAME2): $(SRC) push_swap.c
 	gcc $(CFLAGS) $(HEADER) $(SRC) push_swap.c $(LIB) -o $(NAME2)
 
 clean:
 	make -C libft clean
 	make -C ft_printf clean
 
-fclean: clean
-	rm -rf $(NAME1) $(NAME2)
+fclean:
 	make -C libft fclean
 	make -C ft_printf fclean
+	rm -rf $(NAME1) $(NAME2)
 
 re: fclean all
 
 .PHONY: clean flcean all re
-
-ARG=$(ruby -e "puts (1..100).to_a.shuffle.join(' ')")
