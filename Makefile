@@ -22,7 +22,7 @@ SRC :=	check_argv_and_placing_stack.c \
 		rotate.c \
 		reverse_rotate.c \
 
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -g -O0 -Wall -Wextra -Werror
 HEADER := -I./libft/includes
 LIB := -L./libft -lft -L./ft_printf -lftprintf
 

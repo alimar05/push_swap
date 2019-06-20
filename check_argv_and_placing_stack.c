@@ -41,12 +41,10 @@ static char		is_not_digit_space(t_stack *stack, int argc, char **argv)
 static char		fill_stack(t_stack *stack, int argc, char **argv)
 {
 	int				i;
-	int				j;
 	long int		value;
 	char			**str;
 
 	i = 0;
-	j = 0;
 	while (++i < argc)
 	{
 		str = argv + i;
@@ -73,10 +71,10 @@ static char		is_dupl_in_stack(t_stack *stack)
 	t_doubly_list *buffer2;
 
 	buffer1 = stack->btm_b;
-	while (buffer1)
+	while (buffer1->next)
 	{
-		buffer2 = stack->btm_b;
-		while (buffer1 != buffer2 && buffer2)
+		buffer2 = buffer1->next;
+		while (buffer2)
 		{
 			if (buffer1->value == buffer2->value)
 				return (1);
