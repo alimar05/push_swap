@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 12:10:57 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/16 00:13:47 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/20 13:51:40 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_doubly_list			*del_list_forw(t_doubly_list *doubly_list)
 
 void					print_stack(t_stack *stack)
 {
-	int				i;
+	size_t			i;
 	t_doubly_list	*buf_a;
 	t_doubly_list	*buf_b;
 

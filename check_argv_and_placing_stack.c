@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:15:43 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/09 17:03:30 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/20 13:50:03 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char		is_not_digit_space(t_stack *stack, int argc, char **argv)
 {
-	size_t			i;
-	size_t			j;
+	int				i;
+	int				j;
 
 	i = 0;
 	stack->size = 0;
@@ -40,8 +40,8 @@ static char		is_not_digit_space(t_stack *stack, int argc, char **argv)
 
 static char		fill_stack(t_stack *stack, int argc, char **argv)
 {
-	size_t			i;
-	size_t			j;
+	int				i;
+	int				j;
 	long int		value;
 	char			**str;
 
