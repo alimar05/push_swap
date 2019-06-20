@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:15:43 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/20 13:50:03 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/20 23:59:59 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char		is_not_digit_space(t_stack *stack, int argc, char **argv)
 				stack->size++;
 		}
 	}
-	return (0);
+	return (stack->size == 0 ? 1 : 0);
 }
 
 static char		fill_stack(t_stack *stack, int argc, char **argv)
@@ -69,6 +69,7 @@ static char		is_dupl_in_stack(t_stack *stack)
 {
 	t_doubly_list *buffer1;
 	t_doubly_list *buffer2;
+
 
 	buffer1 = stack->btm_b;
 	while (buffer1->next)
