@@ -32,6 +32,9 @@ typedef struct				s_stack
 	t_doubly_list			*btm_b;
 	size_t				iter_count;
 	size_t					size;
+	size_t				len_less_pvt;
+	size_t				len_more_pvt;
+	t_doubly_list			*len_pvts_b;
 }							t_stack;
 
 int							ft_printf(const char *format, ...);
@@ -56,9 +59,9 @@ char						is_rotate_command(t_stack *stack, char *line);
 char						is_rev_rotate_command(t_stack *stack, char *line);
 char						is_placing_argv_stack(t_stack *stack, int argc, char **argv);
 t_doubly_list				*ft_list_new(int value);
-t_doubly_list				*del_list_forw(t_doubly_list *doubly_list);
+t_doubly_list				*del_list_forw(t_stack *stack);
 t_doubly_list				*ft_list_push_back(t_stack *stack, int value);
-t_doubly_list				*ft_list_push_forw(t_doubly_list *doubly_list, int len);
+t_doubly_list				*ft_list_push_forw(t_stack *stack);
 int					find_pvt_stack_a(t_stack *stack, int len);
 int					find_pvt_stack_b(t_stack *stack, int len);
 char					is_less_pvt_stack_a(t_stack *stack, int len, int pvt);

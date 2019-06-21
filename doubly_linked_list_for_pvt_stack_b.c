@@ -12,37 +12,37 @@
 
 #include "push_swap.h"
 
-t_doubly_list			*ft_list_push_forw(t_doubly_list *doubly_list, int value)
+t_doubly_list			*ft_list_push_forw(t_stack *stack)
 {
 	t_doubly_list	*buffer;
 
-	if (doubly_list)
+	if (stack->len_pvts_b)
 	{
-		if (!(buffer = ft_list_new(value)))
+		if (!(buffer = ft_list_new(stack->len_less_pvt)))
 		{
-			free_doubly_list(doubly_list);
+			free_doubly_list(stack->len_pvts_b);
 			exit(EXIT_FAILURE);
 		}
-		doubly_list->prev = buffer;
-		buffer->next = doubly_list;
+		stack->len_pvts_b->prev = buffer;
+		buffer->next = stack->len_pvts_b;
 		return (buffer);
 	}
 	else
 	{
-		if (!(buffer = ft_list_new(value)))
+		if (!(buffer = ft_list_new(stack->len_less_pvt)))
 			exit(EXIT_FAILURE);
 		return (buffer);
 	}
 }
 
-t_doubly_list			*del_list_forw(t_doubly_list *doubly_list)
+t_doubly_list			*del_list_forw(t_stack *stack)
 {
 	t_doubly_list		*buffer;
 
-	if (doubly_list)
+	if (stack->len_pvts_b)
 	{
-		buffer = doubly_list->next;
-		free(doubly_list);
+		buffer = stack->len_pvts_b->next;
+		free(stack->len_pvts_b);
 		return (buffer);
 	}
 	return (NULL);
