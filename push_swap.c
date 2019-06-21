@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:09:35 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/21 19:54:09 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/21 20:11:25 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		sort(t_stack *stack)
 			len_pvts_b = del_list_forw(len_pvts_b);
 			if (len_more_pvt == 2)
 			{
-				if ((stack->size - stack->len_a > 1)
+				if ((len_pvts_b != NULL && len_pvts_b->value > 1)
 						&& (stack->top_a->value > stack->top_a->next->value)
 						&& (stack->top_b->value < stack->top_b->next->value))
 				{
@@ -170,14 +170,14 @@ void		sort(t_stack *stack)
 			// TO DO sorted function for double and triple
 			if (len_more_pvt == 2)
 			{
-/*				if ((stack->size - stack->len_a > 1)
+				if ((len_pvts_b != NULL && len_pvts_b->value > 1)
 						&& (stack->top_a->value > stack->top_a->next->value)
 						&& (stack->top_b->value < stack->top_b->next->value))
 				{
 					ss(stack);
 					stack->iter_count++;
 				}
-				else*/ if (stack->top_a->value > stack->top_a->next->value)
+				else if (stack->top_a->value > stack->top_a->next->value)
 				{
 					sa(stack);
 					stack->iter_count++;
@@ -186,7 +186,6 @@ void		sort(t_stack *stack)
 		}
 	}
 	print_stack(stack);
-	free_doubly_list(len_pvts_b);
 	ft_printf("%d\n", stack->iter_count);
 }
 
