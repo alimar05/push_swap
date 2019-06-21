@@ -137,6 +137,7 @@ void		sort(t_stack *stack)
 		}
 		len_pvts_b = ft_list_push_forw(len_pvts_b, len_less_pvt);
 	}
+	// TO DO sorted function for double and triple
 /*
 	while (len_pvts_b)
 	{
