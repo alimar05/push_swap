@@ -65,29 +65,3 @@ t_doubly_list			*ft_list_push_back(t_stack *stack, int value)
 		return (buffer);
 	}
 }
-
-/*
-void					print_stack(t_stack *stack)
-{
-	t_doubly_list		*buf_a;
-	t_doubly_list		*buf_b;
-
-	ft_printf("------------------------\n");
-	ft_printf("%d\n", stack->len_a);
-	ft_printf("------------------------\n");
-	buf_a = stack->top_a;
-	while (buf_a)
-	{
-		ft_printf("%d\n", buf_a->value);
-		buf_a = buf_a->next;
-	}
-	ft_printf("------------------------\n");
-	buf_b = stack->top_b;
-	while (buf_b)
-	{
-		ft_printf("%d\n", buf_b->value);
-		buf_b = buf_b->prev;
-	}
-	ft_printf("------------------------\n");
-}
-*/
