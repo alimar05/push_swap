@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:09:35 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/22 15:27:41 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/22 17:23:28 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,10 +170,10 @@ int			main(int argc, char **argv)
 			write(2, "Error\n", 6);
 			return (0);
 		}
-//		print_stack(&stack);
+		print_stack(&stack);
 		sort(&stack);
-//		print_stack(&stack);
-		print_commands(&stack);
+		print_stack(&stack);
+//		print_commands(&stack);
 		ft_printf("%d\n", stack.iter_count);
 		free_doubly_list(stack.btm_b);
 		free_doubly_list(stack.len_pvts_b);

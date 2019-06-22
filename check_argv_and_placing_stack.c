@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:15:43 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/20 23:59:59 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/22 15:43:05 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static char		is_dupl_in_stack(t_stack *stack)
 {
 	t_doubly_list *buffer1;
 	t_doubly_list *buffer2;
-
 
 	buffer1 = stack->btm_b;
 	while (buffer1->next)

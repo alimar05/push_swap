@@ -6,12 +6,9 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 12:46:24 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/14 13:59:08 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/22 17:15:07 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include "push_swap.h"
-#include <stdio.h>
 
 static void	swap(int *a, int *b)
 {
@@ -33,21 +30,15 @@ static int	partition(int *arr, int low, int high, char asc)
 	j = low - 1;
 	while (++j <= high - 1)
 	{
-		if (asc)
+		if (asc && (arr[j] <= pivot))
 		{
-			if (arr[j] <= pivot)
-			{
-				i++;
-				swap(arr + i, arr + j);
-			}
+			i++;
+			swap(arr + i, arr + j);
 		}
-		else
+		else if (!asc && (arr[j] >= pivot))
 		{
-			if (arr[j] >= pivot)
-			{
-				i++;
-				swap(arr + i, arr + j);
-			}
+			i++;
+			swap(arr + i, arr + j);
 		}
 	}
 	swap(arr + i + 1, arr + high);
