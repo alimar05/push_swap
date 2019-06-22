@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 14:09:35 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/21 20:11:25 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/22 15:27:41 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ void		sort_double(t_stack *stack)
 			&& (stack->top_b->value < stack->top_b->next->value))
 		{
 			ss(stack);
+			stack->command_list = ft_command_list(stack, "ss\n");
 			stack->iter_count++;
 		}
 		else if (stack->top_a->value > stack->top_a->next->value)
 		{
 			sa(stack);
+			stack->command_list = ft_command_list(stack, "sa\n");
 			stack->iter_count++;
 		}
 	}
@@ -33,13 +35,14 @@ void		sort_double(t_stack *stack)
 
 void		sort(t_stack *stack)
 {
-	int			pvt;
+	int				pvt;
 	size_t			len;
 	size_t			ra_count;
 	size_t			rb_count;
 
 	stack->iter_count = 0;
 	stack->len_pvts_b = NULL;
+	stack->command_list = NULL;
 	while (stack->len_a > 2)
 	{
 		stack->len_less_pvt = 0;
@@ -49,12 +52,14 @@ void		sort(t_stack *stack)
 			if (stack->top_a->value < pvt)
 			{
 				pb(stack);
+				stack->command_list = ft_command_list(stack, "pb\n");
 				stack->len_less_pvt++;
 				stack->iter_count++;
 			}
 			else
 			{
 				ra(stack);
+				stack->command_list = ft_command_list(stack, "ra\n");
 				stack->iter_count++;
 			}
 		}
@@ -64,6 +69,7 @@ void		sort(t_stack *stack)
 		&& (stack->top_a->value > stack->top_a->next->value))
 	{
 		sa(stack);
+		stack->command_list = ft_command_list(stack, "sa\n");
 		stack->iter_count++;
 	}
 	ra_count = 0;
@@ -76,6 +82,7 @@ void		sort(t_stack *stack)
 			while (stack->len_pvts_b->value)
 			{
 				pa(stack);
+				stack->command_list = ft_command_list(stack, "pa\n");
 				stack->len_more_pvt++;
 				stack->iter_count++;
 				stack->len_pvts_b->value--;
@@ -93,12 +100,14 @@ void		sort(t_stack *stack)
 				if (stack->top_b->value > pvt)
 				{
 					pa(stack);
+					stack->command_list = ft_command_list(stack, "pa\n");
 					stack->len_more_pvt++;
 					stack->iter_count++;
 				}
 				else
 				{
 					rb(stack);
+					stack->command_list = ft_command_list(stack, "rb\n");
 					rb_count++;
 					stack->iter_count++;
 				}
@@ -107,6 +116,7 @@ void		sort(t_stack *stack)
 			while (rb_count)
 			{
 				rrb(stack);
+				stack->command_list = ft_command_list(stack, "rrb\n");
 				rb_count--;
 				stack->iter_count++;
 			}
@@ -121,12 +131,14 @@ void		sort(t_stack *stack)
 					if (stack->top_a->value < pvt)
 					{
 						pb(stack);
+						stack->command_list = ft_command_list(stack, "pb\n");
 						stack->len_less_pvt++;
 						stack->iter_count++;
 					}
 					else
 					{
 						ra(stack);
+						stack->command_list = ft_command_list(stack, "ra\n");
 						ra_count++;
 						stack->iter_count++;
 					}
@@ -135,6 +147,7 @@ void		sort(t_stack *stack)
 				while (ra_count)
 				{
 					rra(stack);
+					stack->command_list = ft_command_list(stack, "rra\n");
 					ra_count--;
 					stack->iter_count++;
 				}
@@ -144,8 +157,6 @@ void		sort(t_stack *stack)
 			sort_double(stack);
 		}
 	}
-	print_stack(stack);
-	ft_printf("%d\n", stack->iter_count);
 }
 
 int			main(int argc, char **argv)
@@ -160,11 +171,13 @@ int			main(int argc, char **argv)
 			return (0);
 		}
 //		print_stack(&stack);
-		ft_printf("------------------------\n");
 		sort(&stack);
-		ft_printf("------------------------\n");
 //		print_stack(&stack);
+		print_commands(&stack);
+		ft_printf("%d\n", stack.iter_count);
 		free_doubly_list(stack.btm_b);
+		free_doubly_list(stack.len_pvts_b);
+		free_command_list(stack.command_list);
 	}
 	return (0);
 }

@@ -6,14 +6,14 @@
 #    By: rymuller <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 12:31:51 by rymuller          #+#    #+#              #
-#    Updated: 2019/06/20 15:22:21 by rymuller         ###   ########.fr        #
+#    Updated: 2019/06/22 15:39:55 by rymuller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME1 := checker
 NAME2 := push_swap
 
-SRC :=		check_argv_and_placing_stack.c \
+SRC :=	check_argv_and_placing_stack.c \
 		doubly_linked_list_for_pvt_stack_b.c \
 		doubly_linked_list_for_stacks.c \
 		push.c \
@@ -24,10 +24,11 @@ SRC :=		check_argv_and_placing_stack.c \
 SRC_CHR :=	checker.c
 
 SRC_PSH :=	push_swap.c \
-		quicksort.c \
-		pivots_operations.c
+			quicksort.c \
+			pivots_operations.c \
+			doubly_linked_list_for_sort_command.c
 
-CFLAGS := -g -O0 -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror
 HEADER := -I./libft/includes
 LIB := -L./libft -lft -L./ft_printf -lftprintf
 
