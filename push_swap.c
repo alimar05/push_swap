@@ -170,10 +170,10 @@ int			main(int argc, char **argv)
 			write(2, "Error\n", 6);
 			return (0);
 		}
-		print_stack(&stack);
+//		print_stack(&stack);
 		sort(&stack);
-		print_stack(&stack);
-//		print_commands(&stack);
+//		print_stack(&stack);
+		print_commands(&stack);
 		ft_printf("%d\n", stack.iter_count);
 		free_doubly_list(stack.btm_b);
 		free_doubly_list(stack.len_pvts_b);

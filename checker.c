@@ -26,20 +26,26 @@ char			is_sort_stack(t_doubly_list *top)
 static char		is_read_command_and_sort(t_stack *stack, char *line)
 {
 	while (get_next_line(0, &line))
+	{
 		if (is_swap_command(stack, line))
-			print_stack(stack);
+//			print_stack(stack);
+			continue ;
 		else if (is_push_command(stack, line))
-			print_stack(stack);
+//			print_stack(stack);
+			continue ;
 		else if (is_rotate_command(stack, line))
-			print_stack(stack);
+//			print_stack(stack);
+			continue ;
 		else if (is_rev_rotate_command(stack, line))
-			print_stack(stack);
+//			print_stack(stack);
+			continue ;
 		else
 		{
 			write(2, "Error\n", 6);
 			free_doubly_list(stack->btm_b);
 			exit(EXIT_FAILURE);
 		}
+	}
 	if (stack->size != stack->len_a)
 		return (0);
 	return (is_sort_stack(stack->btm_b));
