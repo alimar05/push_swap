@@ -26,9 +26,10 @@ SRC_CHR :=	checker.c
 SRC_PSH :=	push_swap.c \
 			quicksort.c \
 			pivots_operations.c \
-			doubly_linked_list_for_sort_command.c
+			doubly_linked_list_for_sort_command.c \
+			optimizing_commands_list.c
 
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -g -O0 -Wall -Wextra -Werror
 HEADER := -I./libft/includes
 LIB := -L./libft -lft -L./ft_printf -lftprintf
 

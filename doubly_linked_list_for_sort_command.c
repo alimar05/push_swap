@@ -69,10 +69,13 @@ void					print_commands(t_stack *stack)
 {
 	t_command_list		*buffer;
 
-	buffer = stack->command_list;
-	while (buffer)
+	if (stack->command_list)
 	{
-		ft_printf(buffer->command);
-		buffer = buffer->next;
+		buffer = stack->command_list;
+		while (buffer)
+		{
+			ft_printf(buffer->command);
+			buffer = buffer->next;
+		}
 	}
 }

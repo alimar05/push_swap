@@ -87,4 +87,5 @@ char								is_less_pvt_stack_a(t_stack *stack, int len,
 		int pvt);
 char								is_more_pvt_stack_b(t_stack *stack, int len,
 		int pvt);
+void								optimizing_commands_list(t_stack *stack);
 #endif

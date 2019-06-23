@@ -40,9 +40,6 @@ void		sort(t_stack *stack)
 	size_t			ra_count;
 	size_t			rb_count;
 
-	stack->iter_count = 0;
-	stack->len_pvts_b = NULL;
-	stack->command_list = NULL;
 	while (stack->len_a > 2)
 	{
 		stack->len_less_pvt = 0;
@@ -165,6 +162,9 @@ int			main(int argc, char **argv)
 
 	if (argc > 1)
 	{
+		stack.iter_count = 0;
+		stack.len_pvts_b = NULL;
+		stack.command_list = NULL;
 		if (!is_placing_argv_stack(&stack, argc, argv))
 		{
 			write(2, "Error\n", 6);
@@ -173,6 +173,16 @@ int			main(int argc, char **argv)
 //		print_stack(&stack);
 		sort(&stack);
 //		print_stack(&stack);
+/*
+		stack.command_list = ft_command_list(&stack, "rr\n");
+		stack.command_list = ft_command_list(&stack, "rr\n");
+		stack.command_list = ft_command_list(&stack, "rra\n");
+		stack.command_list = ft_command_list(&stack, "rra\n");
+		stack.command_list = ft_command_list(&stack, "ra\n");
+		stack.command_list = ft_command_list(&stack, "ra\n");
+		stack.command_list = ft_command_list(&stack, "ra\n");
+*/
+		optimizing_commands_list(&stack);
 		print_commands(&stack);
 		ft_printf("%d\n", stack.iter_count);
 		free_doubly_list(stack.btm_b);
