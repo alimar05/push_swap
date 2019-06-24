@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-t_command_list			*ft_new_command(char *command)
+static t_command_list		*ft_new_command(char *command)
 {
 	t_command_list	*list;
 
@@ -49,7 +49,7 @@ t_command_list			*ft_command_list(t_stack *stack, char *command)
 	}
 }
 
-void					free_command_list(t_command_list *command_list)
+void				free_command_list(t_command_list *command_list)
 {
 	t_command_list		*buffer;
 
@@ -65,7 +65,7 @@ void					free_command_list(t_command_list *command_list)
 	}
 }
 
-void					print_commands(t_stack *stack)
+void				print_commands(t_stack *stack)
 {
 	t_command_list		*buffer;
 
@@ -78,4 +78,22 @@ void					print_commands(t_stack *stack)
 			buffer = buffer->next;
 		}
 	}
+}
+
+int				iter_count(t_stack *stack)
+{
+	t_command_list		*buffer;
+	int			iter_count;
+
+	iter_count = 0;
+	if (stack->command_list)
+	{
+		buffer = stack->command_list;
+		while (buffer)
+		{
+			iter_count++;
+			buffer = buffer->next;
+		}
+	}
+	return (iter_count);
 }

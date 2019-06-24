@@ -37,7 +37,6 @@ typedef struct						s_stack
 	t_doubly_list					*btm_a;
 	t_doubly_list					*top_b;
 	t_doubly_list					*btm_b;
-	size_t							iter_count;
 	size_t							size;
 	size_t							len_less_pvt;
 	size_t							len_more_pvt;
@@ -88,4 +87,5 @@ char								is_less_pvt_stack_a(t_stack *stack, int len,
 char								is_more_pvt_stack_b(t_stack *stack, int len,
 		int pvt);
 void								optimizing_commands_list(t_stack *stack);
+int								iter_count(t_stack *stack);
 #endif
