@@ -12,36 +12,25 @@
 
 #include "push_swap.h"
 
-void		sort_double(t_stack *stack)
-{
-	if (stack->len_more_pvt == 2)
-	{
-		if ((stack->len_pvts_b != NULL && stack->len_pvts_b->value > 1)
-			&& (stack->top_a->value > stack->top_a->next->value)
-			&& (stack->top_b->value < stack->top_b->next->value))
-		{
-			ss(stack);
-			stack->command_list = ft_command_list(stack, "ss\n");
-		}
-		else if (stack->top_a->value > stack->top_a->next->value)
-		{
-			sa(stack);
-			stack->command_list = ft_command_list(stack, "sa\n");
-		}
-	}
-}
-
 void		sort_triple(t_stack *stack)
 {
 	int			a;
 	int			b;
 	int			c;
 
-	if ((stack->len_a == 2 || stack->len_more_pvt == 2)
-		&& (stack->top_a->value > stack->top_a->next->value))
+	if ((stack->len_a == 2 || stack->len_more_pvt == 2))
 	{
-		sa(stack);
-		stack->command_list = ft_command_list(stack, "sa\n");
+		if ((stack->len_pvts_b != NULL && stack->len_pvts_b->value > 1)
+			&& (stack->top_a->value > stack->top_a->next->value)
+			&& (stack->top_b->value < stack->top_b->next->value))
+		{
+			SS(stack);
+		}
+		else if (stack->top_a->value > stack->top_a->next->value)
+		{
+			SA(stack);
+		}
+
 	}
 	else if (stack->len_a >= 3)
 	{
@@ -52,98 +41,67 @@ void		sort_triple(t_stack *stack)
 		{
 			if (c > a && b > a && b > c)
 			{
-				ra(stack);
-				stack->command_list = ft_command_list(stack, "ra\n");
-				sa(stack);
-				stack->command_list = ft_command_list(stack, "sa\n");
-				rra(stack);
-				stack->command_list = ft_command_list(stack, "rra\n");
+				RA(stack);
+				SA(stack);
+				RRA(stack);
 			}
 			else if (a > b && a > c && b > c)
 			{
-				sa(stack);
-				stack->command_list = ft_command_list(stack, "sa\n");
-				rra(stack);
-				stack->command_list = ft_command_list(stack, "rra\n");
+				SA(stack);
+				RRA(stack);
 			}
 			else if (c > a && c > b && a > b)
 			{
-				sa(stack);
-				stack->command_list = ft_command_list(stack, "sa\n");
+				RA(stack);
 			}
 			else if (b > a && b > c && a > c)
 			{
-				rra(stack);
-				stack->command_list = ft_command_list(stack, "rra\n");
+				RRA(stack);
 			}
 			else if (a > c && a > b && c > b)
 			{
-				ra(stack);
-				stack->command_list = ft_command_list(stack, "ra\n");
+				RA(stack);
 			}
 		}
 		else
 		{
 			if (c > a && b > a && b > c)
 			{
-				pb(stack);
-				stack->command_list = ft_command_list(stack, "pb\n");
-				sa(stack);
-				stack->command_list = ft_command_list(stack, "sa\n");
-				pa(stack);
-				stack->command_list = ft_command_list(stack, "pa\n");
+				PB(stack);
+				SA(stack);
+				PA(stack);
 			}
 			else if (a > b && a > c && b > c)
 			{
-				ra(stack);
-				stack->command_list = ft_command_list(stack, "ra\n");
-				sa(stack);
-				stack->command_list = ft_command_list(stack, "sa\n");
-				pb(stack);
-				stack->command_list = ft_command_list(stack, "pb\n");
-				pb(stack);
-				stack->command_list = ft_command_list(stack, "pb\n");
-				rra(stack);
-				stack->command_list = ft_command_list(stack, "rra\n");
-				pa(stack);
-				stack->command_list = ft_command_list(stack, "pa\n");
-				pa(stack);
-				stack->command_list = ft_command_list(stack, "pa\n");
+				RA(stack);
+				SA(stack);
+				PB(stack);
+				PB(stack);
+				RRA(stack);
+				PA(stack);
+				PA(stack);
 			}
 			else if (c > a && c > b && a > b)
 			{
-				sa(stack);
-				stack->command_list = ft_command_list(stack, "sa\n");
+				SA(stack);
 			}
 			else if (b > a && b > c && a > c)
 			{
-				ra(stack);
-				stack->command_list = ft_command_list(stack, "ra\n");
-				pb(stack);
-				stack->command_list = ft_command_list(stack, "pb\n");
-				pb(stack);
-				stack->command_list = ft_command_list(stack, "pb\n");
-				rra(stack);
-				stack->command_list = ft_command_list(stack, "rra\n");
-				pa(stack);
-				stack->command_list = ft_command_list(stack, "pa\n");
-				pa(stack);
-				stack->command_list = ft_command_list(stack, "pa\n");
+				RA(stack);
+				RA(stack);
+				PB(stack);
+				RRA(stack);
+				RRA(stack);
+				PA(stack);
 			}
 			else if (a > c && a > b && c > b)
 			{
-				ra(stack);
-				stack->command_list = ft_command_list(stack, "ra\n");
-				ra(stack);
-				stack->command_list = ft_command_list(stack, "ra\n");
-				pb(stack);
-				stack->command_list = ft_command_list(stack, "pb\n");
-				rra(stack);
-				stack->command_list = ft_command_list(stack, "rra\n");
-				rra(stack);
-				stack->command_list = ft_command_list(stack, "rra\n");
-				pa(stack);
-				stack->command_list = ft_command_list(stack, "pa\n");
+				PB(stack);
+				RA(stack);
+				RA(stack);
+				PA(stack);
+				RRA(stack);
+				RRA(stack);
 			}
 		}
 	}
@@ -164,14 +122,12 @@ void		sort(t_stack *stack)
 		{
 			if (stack->top_a->value < pvt)
 			{
-				pb(stack);
-				stack->command_list = ft_command_list(stack, "pb\n");
+				PB(stack);
 				stack->len_less_pvt++;
 			}
 			else
 			{
-				ra(stack);
-				stack->command_list = ft_command_list(stack, "ra\n");
+				RA(stack);
 			}
 		}
 		stack->len_pvts_b = ft_list_push_forw(stack);
@@ -186,13 +142,12 @@ void		sort(t_stack *stack)
 			stack->len_more_pvt = 0;
 			while (stack->len_pvts_b->value)
 			{
-				pa(stack);
-				stack->command_list = ft_command_list(stack, "pa\n");
+				PA(stack);
 				stack->len_more_pvt++;
 				stack->len_pvts_b->value--;
 			}
 			stack->len_pvts_b = del_list_forw(stack);
-			sort_double(stack);
+			sort_triple(stack);
 		}
 		else
 		{
@@ -203,22 +158,19 @@ void		sort(t_stack *stack)
 			{
 				if (stack->top_b->value > pvt)
 				{
-					pa(stack);
-					stack->command_list = ft_command_list(stack, "pa\n");
+					PA(stack);
 					stack->len_more_pvt++;
 				}
 				else
 				{
-					rb(stack);
-					stack->command_list = ft_command_list(stack, "rb\n");
+					RB(stack);
 					rb_count++;
 				}
 				len--;
 			}
 			while (rb_count)
 			{
-				rrb(stack);
-				stack->command_list = ft_command_list(stack, "rrb\n");
+				RRB(stack);
 				rb_count--;
 			}
 			stack->len_pvts_b->value -= stack->len_more_pvt;
@@ -231,22 +183,19 @@ void		sort(t_stack *stack)
 				{
 					if (stack->top_a->value < pvt)
 					{
-						pb(stack);
-						stack->command_list = ft_command_list(stack, "pb\n");
+						PB(stack);
 						stack->len_less_pvt++;
 					}
 					else
 					{
-						ra(stack);
-						stack->command_list = ft_command_list(stack, "ra\n");
+						RA(stack);
 						ra_count++;
 					}
 					len--;
 				}
 				while (ra_count)
 				{
-					rra(stack);
-					stack->command_list = ft_command_list(stack, "rra\n");
+					RRA(stack);
 					ra_count--;
 				}
 				stack->len_more_pvt -= stack->len_less_pvt;
@@ -283,7 +232,7 @@ int			main(int argc, char **argv)
 		stack.command_list = ft_command_list(&stack, "ra\n");
 */
 //		ft_printf("%d\n", iter_count(&stack));
-//		optimizing_commands_list(&stack);
+		optimizing_commands_list(&stack);
 //		ft_printf("%d\n", iter_count(&stack));
 		print_commands(&stack);
 //		print_stack(&stack);

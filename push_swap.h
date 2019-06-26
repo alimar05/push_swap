@@ -88,4 +88,14 @@ char								is_more_pvt_stack_b(t_stack *stack, int len,
 		int pvt);
 void								optimizing_commands_list(t_stack *stack);
 int								iter_count(t_stack *stack);
+# define SA(stack) sa(stack); stack->command_list = ft_command_list(stack, "sa\n")
+# define SB(stack) sb(stack); stack->command_list = ft_command_list(stack, "sb\n")
+# define SS(stack) ss(stack); stack->command_list = ft_command_list(stack, "ss\n")
+# define RA(stack) ra(stack); stack->command_list = ft_command_list(stack, "ra\n")
+# define RRA(stack) rra(stack); stack->command_list = ft_command_list(stack, "rra\n")
+# define RB(stack) rb(stack); stack->command_list = ft_command_list(stack, "rb\n")
+# define RRB(stack) rrb(stack); stack->command_list = ft_command_list(stack, "rrb\n")
+# define RRR(stack) rrr(stack); stack->command_list = ft_command_list(stack, "rrr\n")
+# define PA(stack) pa(stack); stack->command_list = ft_command_list(stack, "pa\n")
+# define PB(stack) pb(stack); stack->command_list = ft_command_list(stack, "pb\n")
 #endif
