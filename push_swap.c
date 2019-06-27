@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void		sort_triple(t_stack *stack)
+void		sort_triple_a(t_stack *stack)
 {
 	int			a;
 	int			b;
@@ -132,7 +132,7 @@ void		sort(t_stack *stack)
 		}
 		stack->len_pvts_b = ft_list_push_forw(stack);
 	}
-	sort_triple(stack);
+	sort_triple_a(stack);
 	ra_count = 0;
 	rb_count = 0;
 	while (stack->size != stack->len_a)
@@ -147,7 +147,7 @@ void		sort(t_stack *stack)
 				stack->len_pvts_b->value--;
 			}
 			stack->len_pvts_b = del_list_forw(stack);
-			sort_triple(stack);
+			sort_triple_a(stack);
 		}
 		else
 		{
@@ -201,7 +201,7 @@ void		sort(t_stack *stack)
 				stack->len_more_pvt -= stack->len_less_pvt;
 				stack->len_pvts_b = ft_list_push_forw(stack);
 			}
-			sort_triple(stack);
+			sort_triple_a(stack);
 		}
 	}
 }
