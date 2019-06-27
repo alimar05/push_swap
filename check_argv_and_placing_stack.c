@@ -12,6 +12,17 @@
 
 #include "push_swap.h"
 
+char			is_sort_stack(t_doubly_list *top)
+{
+	while (top->next)
+	{
+		if (top->value > top->next->value)
+			return (0);
+		top = top->next;
+	}
+	return (1);
+}
+
 static char		is_not_digit_space(t_stack *stack, int argc, char **argv)
 {
 	int				i;

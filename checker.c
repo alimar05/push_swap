@@ -12,17 +12,6 @@
 
 #include "push_swap.h"
 
-char			is_sort_stack(t_doubly_list *top)
-{
-	while (top->next)
-	{
-		if (top->value > top->next->value)
-			return (0);
-		top = top->next;
-	}
-	return (1);
-}
-
 static char		is_read_command_and_sort(t_stack *stack, char *line)
 {
 	while (get_next_line(0, &line))

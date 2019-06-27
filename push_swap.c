@@ -12,6 +12,20 @@
 
 #include "push_swap.h"
 
+void		sort_double(t_stack *stack)
+{
+	if ((stack->len_pvts_b != NULL && stack->len_pvts_b->value > 1)
+		&& (stack->top_a->value > stack->top_a->next->value)
+		&& (stack->top_b->value < stack->top_b->next->value))
+	{
+		SS(stack);
+	}
+	else if (stack->top_a->value > stack->top_a->next->value)
+	{
+		SA(stack);
+	}
+}
+
 void		sort_triple_a(t_stack *stack)
 {
 	int			a;
@@ -19,18 +33,7 @@ void		sort_triple_a(t_stack *stack)
 	int			c;
 
 	if ((stack->len_a == 2 || stack->len_more_pvt == 2))
-	{
-		if ((stack->len_pvts_b != NULL && stack->len_pvts_b->value > 1)
-			&& (stack->top_a->value > stack->top_a->next->value)
-			&& (stack->top_b->value < stack->top_b->next->value))
-		{
-			SS(stack);
-		}
-		else if (stack->top_a->value > stack->top_a->next->value)
-		{
-			SA(stack);
-		}
-	}
+		sort_double(stack);
 	else if (stack->len_a >= 3)
 	{
 		a = stack->top_a->value; 
@@ -219,22 +222,25 @@ int			main(int argc, char **argv)
 			return (0);
 		}
 //		print_stack(&stack);
-		sort(&stack);
-//		print_stack(&stack);
-/*
-		stack.command_list = ft_command_list(&stack, "rr\n");
-		stack.command_list = ft_command_list(&stack, "rr\n");
-		stack.command_list = ft_command_list(&stack, "rra\n");
-		stack.command_list = ft_command_list(&stack, "rra\n");
-		stack.command_list = ft_command_list(&stack, "ra\n");
-		stack.command_list = ft_command_list(&stack, "ra\n");
-		stack.command_list = ft_command_list(&stack, "ra\n");
-*/
-//		ft_printf("%d\n", iter_count(&stack));
-		optimizing_commands_list(&stack);
-//		ft_printf("%d\n", iter_count(&stack));
-		print_commands(&stack);
-//		print_stack(&stack);
+		if (!is_sort_stack(stack.top_a))
+		{
+			sort(&stack);
+			optimizing_commands_list(&stack);
+	//		print_stack(&stack);
+	/*
+			stack.command_list = ft_command_list(&stack, "rr\n");
+			stack.command_list = ft_command_list(&stack, "rr\n");
+			stack.command_list = ft_command_list(&stack, "rra\n");
+			stack.command_list = ft_command_list(&stack, "rra\n");
+			stack.command_list = ft_command_list(&stack, "ra\n");
+			stack.command_list = ft_command_list(&stack, "ra\n");
+			stack.command_list = ft_command_list(&stack, "ra\n");
+	*/
+	//		ft_printf("%d\n", iter_count(&stack));
+	//		ft_printf("%d\n", iter_count(&stack));
+			print_commands(&stack);
+	//		print_stack(&stack);
+		}
 		free_doubly_list(stack.btm_b);
 		free_doubly_list(stack.len_pvts_b);
 		free_command_list(stack.command_list);
