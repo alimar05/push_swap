@@ -27,7 +27,8 @@ SRC_PSH :=	push_swap.c \
 			quicksort.c \
 			pivots_operations.c \
 			doubly_linked_list_for_sort_command.c \
-			optimizing_sort_algorithm.c
+			optimizing_sort_algorithm.c \
+			sort_triple_a.c
 
 CFLAGS := -Wall -Wextra -Werror
 HEADER := -I./libft/includes

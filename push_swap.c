@@ -12,109 +12,9 @@
 
 #include "push_swap.h"
 
-void		sort_double(t_stack *stack)
+static void		find_pvt_leave_less_four_elem_stack_a(t_stack *stack)
 {
-	if ((stack->len_pvts_b != NULL && stack->len_pvts_b->value > 1)
-		&& (stack->top_a->value > stack->top_a->next->value)
-		&& (stack->top_b->value < stack->top_b->next->value))
-	{
-		SS(stack);
-	}
-	else if (stack->top_a->value > stack->top_a->next->value)
-	{
-		SA(stack);
-	}
-}
-
-void		sort_triple_a(t_stack *stack)
-{
-	int			a;
-	int			b;
-	int			c;
-
-	if ((stack->len_a == 2 || stack->len_more_pvt == 2))
-		sort_double(stack);
-	else if (stack->len_a >= 3)
-	{
-		a = stack->top_a->value; 
-		b = stack->top_a->next->value;
-		c = stack->top_a->next->next->value;
-		if (stack->len_a == 3)
-		{
-			if (c > a && b > a && b > c)
-			{
-				RA(stack);
-				SA(stack);
-				RRA(stack);
-			}
-			else if (a > b && a > c && b > c)
-			{
-				SA(stack);
-				RRA(stack);
-			}
-			else if (c > a && c > b && a > b)
-			{
-				RA(stack);
-			}
-			else if (b > a && b > c && a > c)
-			{
-				RRA(stack);
-			}
-			else if (a > c && a > b && c > b)
-			{
-				RA(stack);
-			}
-		}
-		else
-		{
-			if (c > a && b > a && b > c)
-			{
-				PB(stack);
-				SA(stack);
-				PA(stack);
-			}
-			else if (a > b && a > c && b > c)
-			{
-				RA(stack);
-				SA(stack);
-				PB(stack);
-				PB(stack);
-				RRA(stack);
-				PA(stack);
-				PA(stack);
-			}
-			else if (c > a && c > b && a > b)
-			{
-				SA(stack);
-			}
-			else if (b > a && b > c && a > c)
-			{
-				RA(stack);
-				RA(stack);
-				PB(stack);
-				RRA(stack);
-				RRA(stack);
-				PA(stack);
-			}
-			else if (a > c && a > b && c > b)
-			{
-				PB(stack);
-				RA(stack);
-				RA(stack);
-				PA(stack);
-				RRA(stack);
-				RRA(stack);
-			}
-		}
-	}
-}
-
-void		sort(t_stack *stack)
-{
-	int				pvt;
-	size_t			len;
-	size_t			ra_count;
-	size_t			rb_count;
+	int			pvt;
 
 	while (stack->len_a > 3)
 	{
@@ -134,9 +34,69 @@ void		sort(t_stack *stack)
 		}
 		stack->len_pvts_b = ft_list_push_forw(stack);
 	}
-	sort_triple_a(stack);
-	ra_count = 0;
+}
+
+static void		find_pvt_more_elem_push_a(t_stack *stack)
+{
+	size_t			len;
+	int			pvt;
+	size_t			rb_count;
+
 	rb_count = 0;
+	stack->len_more_pvt = 0;
+	len = stack->len_pvts_b->value;
+	pvt = find_pvt_stack_b(stack, len);
+	while (is_more_pvt_stack_b(stack, len, pvt))
+	{
+		if (stack->top_b->value > pvt)
+		{
+			PA(stack);
+			stack->len_more_pvt++;
+		}
+		else
+		{
+			RB(stack);
+			rb_count++;
+		}
+		len--;
+	}
+	DEFAULT_STATE_B(stack, rb_count);
+	stack->len_pvts_b->value -= stack->len_more_pvt;
+}
+
+static void		find_pvt_less_elem_push_b(t_stack *stack)
+{
+	size_t			len;
+	int			pvt;
+	size_t			ra_count;
+
+	ra_count = 0;
+	stack->len_less_pvt = 0;
+	len = stack->len_more_pvt;
+	pvt = find_pvt_stack_a(stack, len);
+	while (is_less_pvt_stack_a(stack, len, pvt))
+	{
+		if (stack->top_a->value < pvt)
+		{
+			PB(stack);
+			stack->len_less_pvt++;
+		}
+		else
+		{
+			RA(stack);
+			ra_count++;
+		}
+		len--;
+	}
+	DEFAULT_STATE_A(stack, ra_count);
+	stack->len_more_pvt -= stack->len_less_pvt;
+	stack->len_pvts_b = ft_list_push_forw(stack);
+}
+
+static void		sort(t_stack *stack)
+{
+	find_pvt_leave_less_four_elem_stack_a(stack);
+	sort_triple_a(stack);
 	while (stack->size != stack->len_a)
 	{
 		if (stack->len_pvts_b->value < 3)
@@ -153,56 +113,9 @@ void		sort(t_stack *stack)
 		}
 		else
 		{
-			stack->len_more_pvt = 0;
-			len = stack->len_pvts_b->value;
-			pvt = find_pvt_stack_b(stack, len);
-			while (is_more_pvt_stack_b(stack, len, pvt))
-			{
-				if (stack->top_b->value > pvt)
-				{
-					PA(stack);
-					stack->len_more_pvt++;
-				}
-				else
-				{
-					RB(stack);
-					rb_count++;
-				}
-				len--;
-			}
-			while (rb_count)
-			{
-				RRB(stack);
-				rb_count--;
-			}
-			stack->len_pvts_b->value -= stack->len_more_pvt;
+			find_pvt_more_elem_push_a(stack);
 			while (stack->len_more_pvt > 3)
-			{
-				stack->len_less_pvt = 0;
-				len = stack->len_more_pvt;
-				pvt = find_pvt_stack_a(stack, len);
-				while (is_less_pvt_stack_a(stack, len, pvt))
-				{
-					if (stack->top_a->value < pvt)
-					{
-						PB(stack);
-						stack->len_less_pvt++;
-					}
-					else
-					{
-						RA(stack);
-						ra_count++;
-					}
-					len--;
-				}
-				while (ra_count)
-				{
-					RRA(stack);
-					ra_count--;
-				}
-				stack->len_more_pvt -= stack->len_less_pvt;
-				stack->len_pvts_b = ft_list_push_forw(stack);
-			}
+				find_pvt_less_elem_push_b(stack);
 			sort_triple_a(stack);
 		}
 	}
