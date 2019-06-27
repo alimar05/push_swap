@@ -29,7 +29,7 @@ SRC_PSH :=	push_swap.c \
 			doubly_linked_list_for_sort_command.c \
 			optimizing_sort_algorithm.c
 
-CFLAGS := -g -O0 -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror
 HEADER := -I./libft/includes
 LIB := -L./libft -lft -L./ft_printf -lftprintf
 

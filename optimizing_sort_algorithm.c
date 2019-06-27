@@ -35,6 +35,13 @@ void		optimizing_commands_list(t_stack *stack)
 				delete_command(stack, buffer->next);
 				buffer = buffer->prev;
 			}
+			else if (!ft_strcmp(buffer->next->command, "rrb\n")
+				&& !ft_strcmp(buffer->next->next->command, "rb\n"))
+			{
+				delete_command(stack, buffer->next);
+				delete_command(stack, buffer->next);
+				buffer = buffer->prev;
+			}
 			else
 				buffer = buffer->next;
 		}

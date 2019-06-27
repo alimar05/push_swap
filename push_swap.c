@@ -30,7 +30,6 @@ void		sort_triple_a(t_stack *stack)
 		{
 			SA(stack);
 		}
-
 	}
 	else if (stack->len_a >= 3)
 	{
