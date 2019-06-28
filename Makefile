@@ -6,7 +6,7 @@
 #    By: rymuller <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/20 12:31:51 by rymuller          #+#    #+#              #
-#    Updated: 2019/06/28 16:33:24 by rymuller         ###   ########.fr        #
+#    Updated: 2019/06/28 16:48:11 by rymuller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC_PSH :=	push_swap.c \
 			optimizing_sort_algorithm.c \
 			sort_triple_a.c
 
-CFLAGS := -g -O0 -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror
 HEADER := -I./libft/includes
 LIB := -L./libft -lft -L./ft_printf -lftprintf
 
