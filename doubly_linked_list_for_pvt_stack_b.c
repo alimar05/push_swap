@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 17:28:24 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/22 17:47:57 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/28 15:24:40 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,11 @@ static void				print_stacks_number(t_stack *stack,
 	else
 	{
 		if ((*buf_a)->color)
-		{
 			ft_printf(C"%-15d\t"C, (*buf_a)->value);
-			(*buf_a)->color = 0;
-		}
 		else
-			ft_printf(W"%-15d\t"W, (*buf_a)->value);
+			ft_printf(N"%-15d\t"N, (*buf_a)->value);
+		if ((*buf_a)->color)
+			(*buf_a)->color = 0;
 		(*buf_a) = (*buf_a)->next;
 	}
 	if (*i > stack->size - stack->len_a)
@@ -69,17 +68,16 @@ static void				print_stacks_number(t_stack *stack,
 	else
 	{
 		if ((*buf_b)->color)
-		{
-			ft_printf(C"%-15d\t"C, (*buf_b)->value);
-			(*buf_b)->color = 0;
-		}
+			ft_printf(C"%-15d\t\n"C, (*buf_b)->value);
 		else
-			ft_printf(W"%-15d\t\n"W, (*buf_b)->value);
+			ft_printf(N"%-15d\t\n"N, (*buf_b)->value);
+		if ((*buf_b)->color)
+			(*buf_b)->color = 0;
 		(*buf_b) = (*buf_b)->prev;
 	}
 }
 
-void					print_stack(t_stack *stack)
+void					print(t_stack *stack)
 {
 	size_t			i;
 	t_doubly_list	*buf_a;

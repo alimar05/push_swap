@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_triple_a.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/28 14:43:06 by rymuller          #+#    #+#             */
+/*   Updated: 2019/06/28 14:59:18 by rymuller         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void		sort_double(t_stack *stack)
@@ -14,7 +26,8 @@ static void		sort_double(t_stack *stack)
 	}
 }
 
-static void		sort_triple_without_sorted_a(t_stack *stack, int *a, int *b, int *c)
+static void		sort_triple_without_sorted_a(t_stack *stack, int *a, int *b,
+		int *c)
 {
 	if (*c > *a && *b > *a && *b > *c)
 	{
@@ -41,7 +54,8 @@ static void		sort_triple_without_sorted_a(t_stack *stack, int *a, int *b, int *c
 	}
 }
 
-static void		sort_triple_with_sorted_a_1(t_stack *stack, int *a, int *b, int *c)
+static void		sort_triple_with_sorted_a_1(t_stack *stack, int *a, int *b,
+		int *c)
 {
 	if (*c > *a && *b > *a && *b > *c)
 	{
@@ -65,7 +79,8 @@ static void		sort_triple_with_sorted_a_1(t_stack *stack, int *a, int *b, int *c)
 	}
 }
 
-static void		sort_triple_with_sorted_a(t_stack *stack, int *a, int *b, int *c)
+static void		sort_triple_with_sorted_a(t_stack *stack, int *a, int *b,
+		int *c)
 {
 	if ((*c > *a && *b > *a && *b > *c)
 		|| (*a > *b && *a > *c && *b > *c)
@@ -101,7 +116,7 @@ void			sort_triple_a(t_stack *stack)
 		sort_double(stack);
 	else if (stack->len_a >= 3)
 	{
-		a = stack->top_a->value; 
+		a = stack->top_a->value;
 		b = stack->top_a->next->value;
 		c = stack->top_a->next->next->value;
 		if (stack->len_a == 3)
@@ -110,5 +125,3 @@ void			sort_triple_a(t_stack *stack)
 			sort_triple_with_sorted_a(stack, &a, &b, &c);
 	}
 }
-
-

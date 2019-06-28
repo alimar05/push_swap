@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 16:38:27 by rymuller          #+#    #+#             */
-/*   Updated: 2019/05/16 18:31:03 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/28 15:01:23 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,39 +17,16 @@ char	is_rev_rotate_command(t_stack *stack, char *line)
 	if (!ft_strcmp(line, "rra"))
 	{
 		rra(stack);
-		if (stack->print_stack)
-		{
-			if (stack->color && (stack->len_a > 1))
-				stack->top_a->color = 1;
-			ft_printf(">>>>>> rra\n");
-			print_stack(stack);
-		}
 		return (1);
 	}
 	else if (!ft_strcmp(line, "rrb"))
 	{
 		rrb(stack);
-		if (stack->print_stack)
-		{
-			if (stack->color && (stack->size - stack->len_a > 1))
-				stack->top_b->color = 1;
-			ft_printf(">>>>>> rrb\n");
-			print_stack(stack);
-		}
 		return (1);
 	}
 	else if (!ft_strcmp(line, "rrr"))
 	{
 		rrr(stack);
-		if (stack->print_stack)
-		{
-			if (stack->color && (stack->len_a > 1))
-				stack->top_a->color = 1;
-			if (stack->color && (stack->size - stack->len_a > 1))
-				stack->top_b->color = 1;
-			ft_printf(">>>>>> rrr\n");
-			print_stack(stack);
-		}
 		return (1);
 	}
 	return (0);
@@ -73,6 +50,13 @@ void	rra(t_stack *stack)
 		if (stack->size == stack->len_a)
 			stack->btm_b = stack->top_a;
 	}
+	if (stack->print)
+	{
+		if (stack->color && (stack->len_a > 1))
+			stack->top_a->color = 1;
+		stack->color ? ft_printf(C">>>>> rra\n"C) : ft_printf(N">>>>> rra\n"N);
+		print(stack);
+	}
 }
 
 void	rrb(t_stack *stack)
@@ -93,10 +77,36 @@ void	rrb(t_stack *stack)
 		if (stack->len_a == 0)
 			stack->btm_a = stack->top_b;
 	}
+	if (stack->print)
+	{
+		if (stack->color && (stack->size - stack->len_a > 1))
+			stack->top_b->color = 1;
+		stack->color ? ft_printf(C">>>>> rrb\n"C) : ft_printf(N">>>>> rrb\n"N);
+		print(stack);
+	}
 }
 
 void	rrr(t_stack *stack)
 {
+	char	flag;
+
+	flag = stack->print;
+	if (flag)
+		stack->print = 0;
+	if (flag)
+		stack->print = 1;
 	rra(stack);
 	rrb(stack);
+	if (stack->print)
+	{
+		if (stack->color && (stack->len_a > 1))
+			stack->top_a->color = 1;
+		if (stack->color && (stack->size - stack->len_a > 1))
+			stack->top_b->color = 1;
+		if (stack->color)
+			ft_printf(C">>>>> rrr\n"C);
+		else
+			ft_printf(N">>>>> rrr\n"N);
+		print(stack);
+	}
 }

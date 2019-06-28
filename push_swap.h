@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 13:06:27 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/22 15:48:19 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/28 15:11:33 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct						s_doubly_list
 	int								value;
 	struct s_doubly_list			*prev;
 	struct s_doubly_list			*next;
-	unsigned int				color:1;
+	unsigned int					color:1;
 }									t_doubly_list;
 
 typedef struct						s_doubly_command_list
@@ -51,7 +51,7 @@ typedef struct						s_stack
 	size_t							len_more_pvt;
 	t_doubly_list					*len_pvts_b;
 	t_command_list					*command_list;
-	unsigned int					print_stack:1;
+	unsigned int					print:1;
 	unsigned int					color:1;
 }									t_stack;
 
@@ -67,7 +67,7 @@ void								rr(t_stack *stack);
 void								rra(t_stack *stack);
 void								rrb(t_stack *stack);
 void								rrr(t_stack *stack);
-void								print_stack(t_stack *stack);
+void								print(t_stack *stack);
 void								print_commands(t_stack *stack);
 void								free_doubly_list(t_doubly_list
 		*doubly_list);
@@ -89,7 +89,7 @@ t_doubly_list						*del_list_forw(t_stack *stack);
 t_doubly_list						*ft_list_push_back(t_stack *stack,
 		int value);
 t_doubly_list						*ft_list_push_forw(t_stack *stack);
-t_command_list						*ft_command_list(t_stack *stack,
+t_command_list						*comm_list(t_stack *stack,
 		char *command);
 int									find_pvt_stack_a(t_stack *stack, int len);
 int									find_pvt_stack_b(t_stack *stack, int len);
@@ -98,18 +98,18 @@ char								is_less_pvt_stack_a(t_stack *stack, int len,
 char								is_more_pvt_stack_b(t_stack *stack, int len,
 		int pvt);
 void								optimizing_commands_list(t_stack *stack);
-int								iter_count(t_stack *stack);
+int									iter_count(t_stack *stack);
 void								sort_triple_a(t_stack *stack);
-# define SA(stack) sa(stack); stack->command_list = ft_command_list(stack, "sa\n")
-# define SB(stack) sb(stack); stack->command_list = ft_command_list(stack, "sb\n")
-# define SS(stack) ss(stack); stack->command_list = ft_command_list(stack, "ss\n")
-# define RA(stack) ra(stack); stack->command_list = ft_command_list(stack, "ra\n")
-# define RRA(stack) rra(stack); stack->command_list = ft_command_list(stack, "rra\n")
-# define RB(stack) rb(stack); stack->command_list = ft_command_list(stack, "rb\n")
-# define RRB(stack) rrb(stack); stack->command_list = ft_command_list(stack, "rrb\n")
-# define RRR(stack) rrr(stack); stack->command_list = ft_command_list(stack, "rrr\n")
-# define PA(stack) pa(stack); stack->command_list = ft_command_list(stack, "pa\n")
-# define PB(stack) pb(stack); stack->command_list = ft_command_list(stack, "pb\n")
-# define DEFAULT_STATE_A(stack, counter) while (counter) {RRA(stack); counter--;}
-# define DEFAULT_STATE_B(stack, counter) while (counter) {RRB(stack); counter--;}
+# define SA(stack) sa(stack); stack->command_list = comm_list(stack, "sa\n")
+# define SB(stack) sb(stack); stack->command_list = comm_list(stack, "sb\n")
+# define SS(stack) ss(stack); stack->command_list = comm_list(stack, "ss\n")
+# define RA(stack) ra(stack); stack->command_list = comm_list(stack, "ra\n")
+# define RRA(stack) rra(stack); stack->command_list = comm_list(stack, "rra\n")
+# define RB(stack) rb(stack); stack->command_list = comm_list(stack, "rb\n")
+# define RRB(stack) rrb(stack); stack->command_list = comm_list(stack, "rrb\n")
+# define RRR(stack) rrr(stack); stack->command_list = comm_list(stack, "rrr\n")
+# define PA(stack) pa(stack); stack->command_list = comm_list(stack, "pa\n")
+# define PB(stack) pb(stack); stack->command_list = comm_list(stack, "pb\n")
+# define DEF_STATE_A(stack, counter) while (counter) {RRA(stack); counter--;}
+# define DEF_STATE_B(stack, counter) while (counter) {RRB(stack); counter--;}
 #endif

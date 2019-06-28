@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 11:52:58 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/22 17:47:27 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/28 15:01:52 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,33 @@ static char		is_read_command_and_sort(t_stack *stack, char *line)
 	return (is_sort_stack(stack->btm_b));
 }
 
+static void		visual_flags(t_stack *stack, int *argc, char ***argv)
+{
+	stack->color = 0;
+	stack->print = 0;
+	if (!ft_strcmp((*argv)[1], "-vc") || !ft_strcmp((*argv)[1], "-cv"))
+	{
+		(*argc)--;
+		(*argv)++;
+		stack->print = 1;
+		stack->color = 1;
+	}
+	else if ((!ft_strcmp((*argv)[1], "-v") && !ft_strcmp((*argv)[2], "-c"))
+			|| (!ft_strcmp((*argv)[1], "-c") && !ft_strcmp((*argv)[2], "-v")))
+	{
+		(*argc) -= 2;
+		(*argv) += 2;
+		stack->print = 1;
+		stack->color = 1;
+	}
+	else if (!ft_strcmp((*argv)[1], "-v"))
+	{
+		(*argc)--;
+		(*argv)++;
+		stack->print = 1;
+	}
+}
+
 int				main(int argc, char **argv)
 {
 	char			*line;
@@ -44,27 +71,7 @@ int				main(int argc, char **argv)
 	if (argc > 1)
 	{
 		line = NULL;
-		stack.color = 0;
-		stack.print_stack = 0;
-		if (!ft_strcmp(argv[1], "-v"))
-		{
-			argc--;
-			argv++;
-			stack.print_stack = 1;
-		}
-		else if (!ft_strcmp(argv[1], "-vc") || !ft_strcmp(argv[1], "-cv"))
-		{
-			argc--;
-			argv++;
-			stack.print_stack = 1;
-			stack.color = 1;
-		}
-		else if (!ft_strcmp(argv[1], "-v") && !ft_strcmp(argv[2], "-c"))
-		{
-			argc -= 2;
-			argv += 2;
-			stack.color = 1;
-		}
+		visual_flags(&stack, &argc, &argv);
 		if (!is_placing_argv_stack(&stack, argc, argv))
 		{
 			write(2, "Error\n", 6);

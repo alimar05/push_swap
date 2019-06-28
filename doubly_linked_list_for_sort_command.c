@@ -6,15 +6,15 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 13:59:40 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/22 15:18:21 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/28 15:17:17 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_command_list		*ft_new_command(char *command)
+static t_command_list	*ft_new_command(char *command)
 {
-	t_command_list	*list;
+	t_command_list		*list;
 
 	if (!(list = (t_command_list *)malloc(sizeof(t_command_list))))
 		return (NULL);
@@ -24,9 +24,9 @@ static t_command_list		*ft_new_command(char *command)
 	return (list);
 }
 
-t_command_list			*ft_command_list(t_stack *stack, char *command)
+t_command_list			*comm_list(t_stack *stack, char *command)
 {
-	t_command_list	*buffer;
+	t_command_list		*buffer;
 
 	if (stack->command_list)
 	{
@@ -49,7 +49,7 @@ t_command_list			*ft_command_list(t_stack *stack, char *command)
 	}
 }
 
-void				free_command_list(t_command_list *command_list)
+void					free_command_list(t_command_list *command_list)
 {
 	t_command_list		*buffer;
 
@@ -65,7 +65,7 @@ void				free_command_list(t_command_list *command_list)
 	}
 }
 
-void				print_commands(t_stack *stack)
+void					print_commands(t_stack *stack)
 {
 	t_command_list		*buffer;
 
@@ -80,10 +80,10 @@ void				print_commands(t_stack *stack)
 	}
 }
 
-int				iter_count(t_stack *stack)
+int						iter_count(t_stack *stack)
 {
 	t_command_list		*buffer;
-	int			iter_count;
+	int					iter_count;
 
 	iter_count = 0;
 	if (stack->command_list)
