@@ -30,7 +30,7 @@ SRC_PSH :=	push_swap.c \
 			optimizing_sort_algorithm.c \
 			sort_triple_a.c
 
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -g -O0 -Wall -Wextra -Werror
 HEADER := -I./libft/includes
 LIB := -L./libft -lft -L./ft_printf -lftprintf
 

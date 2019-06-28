@@ -17,11 +17,21 @@ char	is_push_command(t_stack *stack, char *line)
 	if (!ft_strcmp(line, "pb"))
 	{
 		pb(stack);
+		if (stack->print_stack)
+		{
+			ft_printf(">>>>>> pb\n");
+			print_stack(stack);
+		}
 		return (1);
 	}
 	else if (!ft_strcmp(line, "pa"))
 	{
 		pa(stack);
+		if (stack->print_stack)
+		{
+			ft_printf(">>>>>> pa\n");
+			print_stack(stack);
+		}
 		return (1);
 	}
 	return (0);

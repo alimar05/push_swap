@@ -42,6 +42,7 @@ typedef struct						s_stack
 	size_t							len_more_pvt;
 	t_doubly_list					*len_pvts_b;
 	t_command_list					*command_list;
+	unsigned int					print_stack:1;
 }									t_stack;
 
 int									ft_printf(const char *format, ...);

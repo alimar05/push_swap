@@ -79,10 +79,8 @@ void					print_stack(t_stack *stack)
 		i = stack->len_a + 1;
 	else
 		i = stack->size - stack->len_a + 1;
-	ft_printf("------------------------\n");
 	while (--i > 0)
 		print_stacks_number(stack, &buf_a, &buf_b, &i);
 	write(1, "-\t\t-\n", 5);
 	write(1, "a\t\tb\n", 5);
-	ft_printf("------------------------\n");
 }

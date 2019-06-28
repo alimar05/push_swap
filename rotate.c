@@ -17,16 +17,31 @@ char	is_rotate_command(t_stack *stack, char *line)
 	if (!ft_strcmp(line, "ra"))
 	{
 		ra(stack);
+		if (stack->print_stack)
+		{
+			ft_printf(">>>>>> ra\n");
+			print_stack(stack);
+		}
 		return (1);
 	}
 	else if (!ft_strcmp(line, "rb"))
 	{
 		rb(stack);
+		if (stack->print_stack)
+		{
+			ft_printf(">>>>>> rb\n");
+			print_stack(stack);
+		}
 		return (1);
 	}
 	else if (!ft_strcmp(line, "rr"))
 	{
 		rr(stack);
+		if (stack->print_stack)
+		{
+			ft_printf(">>>>>> rr\n");
+			print_stack(stack);
+		}
 		return (1);
 	}
 	return (0);

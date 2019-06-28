@@ -17,16 +17,12 @@ static char		is_read_command_and_sort(t_stack *stack, char *line)
 	while (get_next_line(0, &line))
 	{
 		if (is_swap_command(stack, line))
-//			print_stack(stack);
 			continue ;
 		else if (is_push_command(stack, line))
-//			print_stack(stack);
 			continue ;
 		else if (is_rotate_command(stack, line))
-//			print_stack(stack);
 			continue ;
 		else if (is_rev_rotate_command(stack, line))
-//			print_stack(stack);
 			continue ;
 		else
 		{
@@ -45,9 +41,16 @@ int				main(int argc, char **argv)
 	char			*line;
 	t_stack			stack;
 
-	line = NULL;
 	if (argc > 1)
 	{
+		line = NULL;
+		stack.print_stack = 0;
+		if (!ft_strcmp(argv[1], "-v"))
+		{
+			argc--;
+			argv++;
+			stack.print_stack = 1;
+		}
 		if (!is_placing_argv_stack(&stack, argc, argv))
 		{
 			write(2, "Error\n", 6);

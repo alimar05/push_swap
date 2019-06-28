@@ -17,16 +17,31 @@ char	is_swap_command(t_stack *stack, char *line)
 	if (!ft_strcmp(line, "sa"))
 	{
 		sa(stack);
+		if (stack->print_stack)
+		{
+			ft_printf(">>>>>> sa\n");
+			print_stack(stack);
+		}
 		return (1);
 	}
 	else if (!ft_strcmp(line, "sb"))
 	{
 		sb(stack);
+		if (stack->print_stack)
+		{
+			ft_printf(">>>>>> sb\n");
+			print_stack(stack);
+		}
 		return (1);
 	}
 	else if (!ft_strcmp(line, "ss"))
 	{
 		ss(stack);
+		if (stack->print_stack)
+		{
+			ft_printf(">>>>>> ss\n");
+			print_stack(stack);
+		}
 		return (1);
 	}
 	return (0);
