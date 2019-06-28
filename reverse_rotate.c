@@ -19,6 +19,8 @@ char	is_rev_rotate_command(t_stack *stack, char *line)
 		rra(stack);
 		if (stack->print_stack)
 		{
+			if (stack->color && (stack->len_a > 1))
+				stack->top_a->color = 1;
 			ft_printf(">>>>>> rra\n");
 			print_stack(stack);
 		}
@@ -29,6 +31,8 @@ char	is_rev_rotate_command(t_stack *stack, char *line)
 		rrb(stack);
 		if (stack->print_stack)
 		{
+			if (stack->color && (stack->size - stack->len_a > 1))
+				stack->top_b->color = 1;
 			ft_printf(">>>>>> rrb\n");
 			print_stack(stack);
 		}
@@ -39,6 +43,10 @@ char	is_rev_rotate_command(t_stack *stack, char *line)
 		rrr(stack);
 		if (stack->print_stack)
 		{
+			if (stack->color && (stack->len_a > 1))
+				stack->top_a->color = 1;
+			if (stack->color && (stack->size - stack->len_a > 1))
+				stack->top_b->color = 1;
 			ft_printf(">>>>>> rrr\n");
 			print_stack(stack);
 		}

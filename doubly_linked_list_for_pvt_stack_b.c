@@ -55,14 +55,26 @@ static void				print_stacks_number(t_stack *stack,
 		ft_printf("\t\t");
 	else
 	{
-		ft_printf("%-15d\t", (*buf_a)->value);
+		if ((*buf_a)->color)
+		{
+			ft_printf(G"%-15d\t"G, (*buf_a)->value);
+			(*buf_a)->color = 0;
+		}
+		else
+			ft_printf("%-15d\t", (*buf_a)->value);
 		(*buf_a) = (*buf_a)->next;
 	}
 	if (*i > stack->size - stack->len_a)
 		ft_printf("\n");
 	else
 	{
-		ft_printf("%-15d\t\n", (*buf_b)->value);
+		if ((*buf_b)->color)
+		{
+			ft_printf(G"%-15d\t"G, (*buf_b)->value);
+			(*buf_b)->color = 0;
+		}
+		else
+			ft_printf("%-15d\t\n", (*buf_b)->value);
 		(*buf_b) = (*buf_b)->prev;
 	}
 }

@@ -13,6 +13,14 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include <libft.h>
+# define N "\x1b[0m"
+# define R "\x1b[31m"
+# define G "\x1b[32m"
+# define Y "\x1b[33m"
+# define B "\x1b[34m"
+# define M "\x1b[35m"
+# define C "\x1b[36m"
+# define W "\x1b[37m"
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
 
@@ -21,6 +29,7 @@ typedef struct						s_doubly_list
 	int								value;
 	struct s_doubly_list			*prev;
 	struct s_doubly_list			*next;
+	unsigned int				color:1;
 }									t_doubly_list;
 
 typedef struct						s_doubly_command_list
@@ -43,6 +52,7 @@ typedef struct						s_stack
 	t_doubly_list					*len_pvts_b;
 	t_command_list					*command_list;
 	unsigned int					print_stack:1;
+	unsigned int					color:1;
 }									t_stack;
 
 int									ft_printf(const char *format, ...);

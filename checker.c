@@ -44,12 +44,26 @@ int				main(int argc, char **argv)
 	if (argc > 1)
 	{
 		line = NULL;
+		stack.color = 0;
 		stack.print_stack = 0;
 		if (!ft_strcmp(argv[1], "-v"))
 		{
 			argc--;
 			argv++;
 			stack.print_stack = 1;
+		}
+		else if (!ft_strcmp(argv[1], "-vc") || !ft_strcmp(argv[1], "-cv"))
+		{
+			argc -= 2;
+			argv -= 2;
+			stack.print_stack = 1;
+			stack.color = 1;
+		}
+		if (!ft_strcmp(argv[1], "-v") && !ft_strcmp(argv[2], "-c"))
+		{
+			argc--;
+			argv++;
+			stack.color = 1;
 		}
 		if (!is_placing_argv_stack(&stack, argc, argv))
 		{

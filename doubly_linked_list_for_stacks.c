@@ -19,6 +19,7 @@ t_doubly_list			*ft_list_new(int value)
 	if (!(list = (t_doubly_list *)malloc(sizeof(t_doubly_list))))
 		return (NULL);
 	list->value = value;
+	list->color = 0;
 	list->prev = NULL;
 	list->next = NULL;
 	return (list);
