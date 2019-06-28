@@ -19,7 +19,7 @@ char	is_push_command(t_stack *stack, char *line)
 		pb(stack);
 		if (stack->print_stack)
 		{
-			if (stack->color)
+			if (stack->color && (stack->len_a > 0))
 				stack->top_b->color = 1;
 			ft_printf(">>>>>> pb\n");
 			print_stack(stack);
@@ -31,7 +31,7 @@ char	is_push_command(t_stack *stack, char *line)
 		pa(stack);
 		if (stack->print_stack)
 		{
-			if (stack->color)
+			if (stack->color && (stack->size - stack->len_a > 0))
 				stack->top_a->color = 1;
 			ft_printf(">>>>>> pa\n");
 			print_stack(stack);
