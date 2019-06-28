@@ -32,7 +32,7 @@ char	is_swap_command(t_stack *stack, char *line)
 		if (stack->print_stack)
 		{
 			if (stack->color && (stack->size - stack->len_a > 1))
-				stack->top_b->next->color = 1;
+				stack->top_b->prev->color = 1;
 			ft_printf(">>>>>> sb\n");
 			print_stack(stack);
 		}
@@ -46,7 +46,7 @@ char	is_swap_command(t_stack *stack, char *line)
 			if (stack->color && (stack->len_a > 1))
 				stack->top_a->next->color = 1;
 			if (stack->color && (stack->size - stack->len_a > 1))
-				stack->top_b->next->color = 1;
+				stack->top_b->prev->color = 1;
 			ft_printf(">>>>>> ss\n");
 			print_stack(stack);
 		}

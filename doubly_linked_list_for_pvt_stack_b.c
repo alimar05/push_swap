@@ -57,7 +57,7 @@ static void				print_stacks_number(t_stack *stack,
 	{
 		if ((*buf_a)->color)
 		{
-			ft_printf(G"%-15d\t"G, (*buf_a)->value);
+			ft_printf(C"%-15d\t"C, (*buf_a)->value);
 			(*buf_a)->color = 0;
 		}
 		else
@@ -70,7 +70,7 @@ static void				print_stacks_number(t_stack *stack,
 	{
 		if ((*buf_b)->color)
 		{
-			ft_printf(G"%-15d\t"G, (*buf_b)->value);
+			ft_printf(C"%-15d\t"C, (*buf_b)->value);
 			(*buf_b)->color = 0;
 		}
 		else
