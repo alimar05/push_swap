@@ -127,8 +127,7 @@ int				main(int argc, char **argv)
 
 	if (argc > 1)
 	{
-		stack.len_pvts_b = NULL;
-		stack.command_list = NULL;
+		initialize(&stack);
 		if (!is_placing_argv_stack(&stack, argc, argv))
 		{
 			write(2, "Error\n", 6);

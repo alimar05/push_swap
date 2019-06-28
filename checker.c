@@ -35,8 +35,6 @@ static char		is_read_command_and_sort(t_stack *stack, char *line)
 
 static void		visual_flags(t_stack *stack, int *argc, char ***argv)
 {
-	stack->color = 0;
-	stack->print = 0;
 	if (!ft_strcmp((*argv)[1], "-vc") || !ft_strcmp((*argv)[1], "-cv"))
 	{
 		(*argc)--;
@@ -69,6 +67,7 @@ int				main(int argc, char **argv)
 	if (argc > 1)
 	{
 		line = NULL;
+		initialize(&stack);
 		visual_flags(&stack, &argc, &argv);
 		if (!is_placing_argv_stack(&stack, argc, argv))
 		{

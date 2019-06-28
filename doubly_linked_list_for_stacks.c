@@ -12,6 +12,22 @@
 
 #include "push_swap.h"
 
+void				initialize(t_stack *stack)
+{
+	stack->len_a = 0;
+	stack->top_a = NULL;
+	stack->btm_a = NULL;
+	stack->top_b = NULL;
+	stack->btm_b = NULL;
+	stack->size = 0;
+	stack->len_less_pvt = 0;
+	stack->len_more_pvt = 0;
+	stack->len_pvts_b = NULL;
+	stack->command_list = NULL;
+	stack->print = 0;
+	stack->color = 0;
+}
+
 t_doubly_list			*ft_list_new(int value)
 {
 	t_doubly_list	*list;

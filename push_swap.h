@@ -100,6 +100,7 @@ char								is_more_pvt_stack_b(t_stack *stack, int len,
 void								optimizing_commands_list(t_stack *stack);
 int									iter_count(t_stack *stack);
 void								sort_triple_a(t_stack *stack);
+void								initialize(t_stack *stack);
 # define SA(stack) sa(stack); stack->command_list = comm_list(stack, "sa\n")
 # define SB(stack) sb(stack); stack->command_list = comm_list(stack, "sb\n")
 # define SS(stack) ss(stack); stack->command_list = comm_list(stack, "ss\n")

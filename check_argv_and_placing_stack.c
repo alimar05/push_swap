@@ -29,7 +29,6 @@ static char		is_not_digit_space(t_stack *stack, int argc, char **argv)
 	int				j;
 
 	i = 0;
-	stack->size = 0;
 	while (++i < argc)
 	{
 		j = -1;
@@ -102,10 +101,6 @@ char			is_placing_argv_stack(t_stack *stack, int argc, char **argv)
 {
 	if (is_not_digit_space(stack, argc, argv))
 		return (0);
-	stack->top_a = NULL;
-	stack->btm_a = NULL;
-	stack->top_b = NULL;
-	stack->btm_b = NULL;
 	if (!fill_stack(stack, argc, argv))
 	{
 		free_doubly_list(stack->btm_b);
