@@ -61,7 +61,7 @@ static void				print_stacks_number(t_stack *stack,
 			(*buf_a)->color = 0;
 		}
 		else
-			ft_printf("%-15d\t", (*buf_a)->value);
+			ft_printf(W"%-15d\t"W, (*buf_a)->value);
 		(*buf_a) = (*buf_a)->next;
 	}
 	if (*i > stack->size - stack->len_a)
@@ -74,7 +74,7 @@ static void				print_stacks_number(t_stack *stack,
 			(*buf_b)->color = 0;
 		}
 		else
-			ft_printf("%-15d\t\n", (*buf_b)->value);
+			ft_printf(W"%-15d\t\n"W, (*buf_b)->value);
 		(*buf_b) = (*buf_b)->prev;
 	}
 }
@@ -93,6 +93,6 @@ void					print_stack(t_stack *stack)
 		i = stack->size - stack->len_a + 1;
 	while (--i > 0)
 		print_stacks_number(stack, &buf_a, &buf_b, &i);
-	write(1, "-\t\t-\n", 5);
-	write(1, "a\t\tb\n", 5);
+	ft_printf(N"-\t\t-\n"N);
+	ft_printf(N"a\t\tb\n"N);
 }
