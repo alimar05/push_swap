@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 14:43:06 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/28 14:59:18 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/28 16:40:28 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void		sort_triple_without_sorted_a(t_stack *stack, int *a, int *b,
 	}
 	else if (*c > *a && *c > *b && *a > *b)
 	{
-		RA(stack);
+		SA(stack);
 	}
 	else if (*b > *a && *b > *c && *a > *c)
 	{
