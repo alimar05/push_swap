@@ -16,14 +16,11 @@ static char		is_read_command_and_sort(t_stack *stack, char *line)
 {
 	while (get_next_line(0, &line))
 	{
-		if (is_swap_command(stack, line))
-			continue ;
-		else if (is_push_command(stack, line))
-			continue ;
-		else if (is_rotate_command(stack, line))
-			continue ;
-		else if (is_rev_rotate_command(stack, line))
-			continue ;
+		if (is_swap_command(stack, line)
+				|| is_push_command(stack, line)
+				|| is_rotate_command(stack, line)
+				|| is_rev_rotate_command(stack, line))
+			free(line);
 		else
 		{
 			write(2, "Error\n", 6);
@@ -47,8 +44,9 @@ static void		visual_flags(t_stack *stack, int *argc, char ***argv)
 		stack->print = 1;
 		stack->color = 1;
 	}
-	else if ((!ft_strcmp((*argv)[1], "-v") && !ft_strcmp((*argv)[2], "-c"))
-			|| (!ft_strcmp((*argv)[1], "-c") && !ft_strcmp((*argv)[2], "-v")))
+	else if ((*argc > 2)
+			&& ((!ft_strcmp((*argv)[1], "-v") && !ft_strcmp((*argv)[2], "-c"))
+			|| (!ft_strcmp((*argv)[1], "-c") && !ft_strcmp((*argv)[2], "-v"))))
 	{
 		(*argc) -= 2;
 		(*argv) += 2;
@@ -85,7 +83,6 @@ int				main(int argc, char **argv)
 		}
 		else
 			write(1, "OK\n", 3);
-		free(line);
 		free_doubly_list(stack.btm_b);
 	}
 	return (0);
