@@ -6,13 +6,13 @@
 #    By: jaleman <jaleman@student.42.us.org>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 23:46:05 by jaleman           #+#    #+#              #
-#    Updated: 2019/02/18 14:35:42 by rymuller         ###   ########.fr        #
+#    Updated: 2019/06/30 15:30:49 by rymuller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME    = libft.a
 
-CFLAGS	= -c -g -O0 -Wall -Wextra -Werror
+CFLAGS	= -c -Wall -Wextra -Werror
 
 all: $(NAME)
 

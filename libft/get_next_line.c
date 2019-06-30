@@ -6,13 +6,13 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 13:08:21 by rymuller          #+#    #+#             */
-/*   Updated: 2019/02/03 16:11:19 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/30 15:38:42 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static t_gnl			*get_list(t_gnl **alst, int fd)
+static t_gnl		*get_list(t_gnl **alst, int fd)
 {
 	t_gnl				*temp;
 
@@ -58,7 +58,8 @@ static void			del_list(t_gnl **alst, int fd)
 	}
 }
 
-static char			*join_buff_to_list(t_gnl *list, char *buff, t_gnl **alst, int fd)
+static char			*join_buff_to_list(t_gnl *list, char *buff,
+		t_gnl **alst, int fd)
 {
 	char				*temp;
 
@@ -83,7 +84,7 @@ static char			*copy_tail_to_list(t_gnl *list, t_gnl **alst, int fd)
 	return (list->content);
 }
 
-int						get_next_line(const int fd, char **line)
+int					get_next_line(const int fd, char **line)
 {
 	static t_gnl		*alst;
 	t_gnl				*list;

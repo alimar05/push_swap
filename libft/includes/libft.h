@@ -6,7 +6,7 @@
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:49:56 by rymuller          #+#    #+#             */
-/*   Updated: 2019/05/03 18:58:20 by rymuller         ###   ########.fr       */
+/*   Updated: 2019/06/30 15:35:27 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ typedef struct		s_list
 typedef struct		s_gnl
 {
 	char			*content;
-	int			fd;
-	struct s_gnl		*next;
-}			t_gnl;
+	int				fd;
+	struct s_gnl	*next;
+}					t_gnl;
 
 char				*ft_itoa(int n);
 void				ft_putnbr(int n);

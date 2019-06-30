@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   doubly_linked_list.c                               :+:      :+:    :+:   */
+/*   doubly_linked_list_for_stacks.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rymuller <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/05 18:26:48 by rymuller          #+#    #+#             */
-/*   Updated: 2019/06/22 15:06:56 by rymuller         ###   ########.fr       */
+/*   Created: 2019/06/30 15:49:52 by rymuller          #+#    #+#             */
+/*   Updated: 2019/06/30 15:49:57 by rymuller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void				initialize(t_stack *stack)
+void					initialize(t_stack *stack)
 {
 	stack->len_a = 0;
 	stack->top_a = NULL;
